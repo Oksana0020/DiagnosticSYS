@@ -18,7 +18,6 @@ namespace DiagnosticSYS
         public frmMakeAppointment()
         {
             InitializeComponent();
-            cboServices.Items.AddRange(new object[] { "MRI", "X-Ray", "CT", "Ultrasound", "Fluoroscopy" });
             this.parent = new mnuMainMenu();
         }
 
