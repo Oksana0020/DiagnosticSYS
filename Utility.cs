@@ -33,6 +33,29 @@ namespace DiagnosticSYS
             return cboName;
         }
 
+        public static ComboBox LoadServiceNames(ComboBox cboServices)
+        {
+            cboServices.Items.Clear();
+
+            string strSQL = "SELECT * FROM Services WHERE Status = 'A'";
+
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+            conn.Open();
+
+            OracleCommand cmd = new OracleCommand(strSQL, conn);
+            OracleDataReader dr = cmd.ExecuteReader();
+
+            //reading equipment names and adding them in combo box
+            while (dr.Read())
+            {
+                cboServices.Items.Add(dr.GetInt32(0).ToString() + " - " + dr.GetString(1));
+            }
+
+            conn.Close();
+            return cboServices;
+        }
+
+
         public static ComboBox LoadRoomNumbers(ComboBox cboRoomNumber)
         {
             cboRoomNumber.Items.Clear();

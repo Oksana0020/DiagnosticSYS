@@ -28,15 +28,16 @@ namespace DiagnosticSYS
             parent.Visible = true;
         }
 
-        private void frmMakeAppointment_Load(object sender, EventArgs e)
+        private void frmMakeAppointment_Load_1(object sender, EventArgs e)
         {
             grpMakingAppointment.Visible = true;
             grpPatientDetails.Visible = true;
+            cboEquipmentName = Utility.LoadEquipmentNames(cboEquipmentName);
 
-            // Get next Service ID
-            //txtApptID.Text = Service.GetNexttxtxApptID().ToString("00");
+            // Get next Appointment ID
+            txtApptID.Text = Appointment.GetNextAppointmentID().ToString("00");
             // Load service names into cboServices combo box
-            //Utility.LoadEquipmentNames(cboServices);
+            Utility.LoadServiceNames(cboServices);
         }
 
 
@@ -192,9 +193,6 @@ namespace DiagnosticSYS
             return !string.IsNullOrWhiteSpace(email) && email.Length >= 7 && email.Length <= 30;
         }
 
-        private void frmMakeAppointment_Load_1(object sender, EventArgs e)
-        {
-            cboEquipmentName = Utility.LoadEquipmentNames(cboEquipmentName);
-        }
+
     }
 }
