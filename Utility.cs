@@ -55,6 +55,29 @@ namespace DiagnosticSYS
             return cboServices;
         }
 
+        public static ComboBox LoadServiceRates(ComboBox cboRates)
+        {
+            cboRates.Items.Clear();
+
+            string strSQL = "SELECT Rate FROM Services WHERE Status = 'A'";
+
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+            conn.Open();
+
+            OracleCommand cmd = new OracleCommand(strSQL, conn);
+            OracleDataReader dr = cmd.ExecuteReader();
+
+            // Reading service rates and adding them to the combo box
+            while (dr.Read())
+            {
+                cboRates.Items.Add(dr.GetDecimal(0).ToString("C"));
+            }
+
+            conn.Close();
+            return cboRates;
+        }
+
+
 
         public static ComboBox LoadRoomNumbers(ComboBox cboRoomNumber)
         {

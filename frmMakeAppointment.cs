@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Oracle.ManagedDataAccess.Client;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
@@ -19,8 +20,60 @@ namespace DiagnosticSYS
         {
             InitializeComponent();
             this.parent = new mnuMainMenu();
+            //cboServices.SelectedIndexChanged += cboServices_SelectedIndexChanged;
         }
 
+        private void cboServices_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboServices.SelectedItem != null)
+            {
+                string selectedItem = cboServices.SelectedItem.ToString();
+
+                // Extract the service ID and name from the selected item
+                int indexOfDash = selectedItem.IndexOf('-');
+                int serviceId = int.Parse(selectedItem.Substring(0, indexOfDash).Trim());
+                string serviceName = selectedItem.Substring(indexOfDash + 1).Trim();
+
+                // Retrieve the rate of the selected service from the database
+                decimal rate = GetServiceRateFromDatabase(serviceName);
+
+                // Display the rate in the txtServiceRate TextBox
+                txtServiceRate.Text = rate.ToString("C");
+
+                // Make grpAppDetails visible
+                grpAppDetails.Visible = true;
+            }
+        }
+
+        // Method to retrieve the service rate from the database
+        private decimal GetServiceRateFromDatabase(string selectedService)
+        {
+            decimal rate = 0;
+            string sqlQuery = "SELECT Rate FROM Services WHERE ServiceName = :selectedService";
+
+            try
+            {
+                using (OracleConnection conn = new OracleConnection(DBConnect.oraDB))
+                {
+                    conn.Open();
+                    using (OracleCommand cmd = new OracleCommand(sqlQuery, conn))
+                    {
+                        cmd.Parameters.Add("selectedService", OracleDbType.Varchar2).Value = selectedService;
+                        object result = cmd.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            rate = Convert.ToDecimal(result);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error retrieving service rate: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return rate;
+        }
 
         private void mnuBack_Click(object sender, EventArgs e)
         {
@@ -38,58 +91,6 @@ namespace DiagnosticSYS
             txtApptID.Text = Appointment.GetNextAppointmentID().ToString("00");
             // Load service names into cboServices combo box
             Utility.LoadServiceNames(cboServices);
-        }
-
-
-        private void cboServices_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DisplayServiceRate();
-            grpAppDetails.Visible = true;
-        }
-        private void DisplayServiceRate()
-        {
-            string selectedService = cboServices.SelectedItem?.ToString();
-            double rate = GetServiceRate(selectedService);
-            string serviceID = GetServiceID(selectedService);
-              txtServiceRate.Text = rate.ToString("C"); 
-        }
-
-        private double GetServiceRate(string service)
-        {
-            switch (service)
-            {
-                case "MRI":
-                    return 500.0;
-                case "X-Ray":
-                    return 200.0;
-                case "CT":
-                    return 700.0;
-                case "Ultrasound":
-                    return 300.0;
-                case "Fluoroscopy":
-                    return 400.0;
-                default:
-                    return 0.0; 
-            }
-        }
-
-        private string GetServiceID(string service)
-        {
-            switch (service)
-            {
-                case "MRI":
-                    return "001";
-                case "X-Ray":
-                    return "002";
-                case "CT":
-                    return "003";
-                case "Ultrasound":
-                    return "004";
-                case "Fluoroscopy":
-                    return "005";
-                default:
-                    return string.Empty;
-            }
         }
 
         private void MakeAppointment_click(object sender, EventArgs e)
@@ -193,6 +194,12 @@ namespace DiagnosticSYS
             return !string.IsNullOrWhiteSpace(email) && email.Length >= 7 && email.Length <= 30;
         }
 
-
+        private void dtmDate_ValueChanged(object sender, EventArgs e)
+        {
+            // Enable ComboBoxes
+            cboAppointmentTime.Enabled = true;
+            cboDoctors.Enabled = true;
+            cboEquipmentName.Enabled = true;
+        }
     }
 }
