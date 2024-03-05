@@ -20,7 +20,10 @@ namespace DiagnosticSYS
         {
             InitializeComponent();
             this.parent = new mnuMainMenu();
-            //cboServices.SelectedIndexChanged += cboServices_SelectedIndexChanged;
+            cboServices.SelectedIndexChanged += cboServices_SelectedIndexChanged;
+            cboAppointmentTime.SelectedIndexChanged += cboAppointmentTime_SelectedIndexChanged;
+            cboDoctors.SelectedIndexChanged += cboDoctors_SelectedIndexChanged;
+            cboEquipmentName.SelectedIndexChanged += cboEquipmentName_SelectedIndexChanged;
         }
 
         private void mnuBack_Click(object sender, EventArgs e)
@@ -29,6 +32,24 @@ namespace DiagnosticSYS
             parent.Visible = true;
         }
 
+        private void frmMakeAppointment_Load_1(object sender, EventArgs e)
+        {
+            grpMakingAppointment.Visible = true;
+            grpPatientDetails.Visible = false;
+            cboEquipmentName = Utility.LoadEquipmentNames(cboEquipmentName);
+
+            // Get next Appointment ID
+            txtApptID.Text = Appointment.GetNextAppointmentID().ToString("00");
+            // Load service names into cboServices combo box
+            Utility.LoadServiceNames(cboServices);
+            Utility.LoadAppointmentTimes(cboAppointmentTime);
+            Utility.loadDoctors(cboDoctors);
+
+            // Disable all ComboBoxes initially
+            cboAppointmentTime.Enabled = false;
+            cboDoctors.Enabled = false;
+            cboEquipmentName.Enabled = false;
+        }
         private void cboServices_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboServices.SelectedItem != null)
@@ -54,18 +75,19 @@ namespace DiagnosticSYS
             }
         }
 
-        private void frmMakeAppointment_Load_1(object sender, EventArgs e)
+        private void dtmDate_ValueChanged(object sender, EventArgs e)
         {
-            grpMakingAppointment.Visible = true;
-            grpPatientDetails.Visible = true;
-            cboEquipmentName = Utility.LoadEquipmentNames(cboEquipmentName);
-
-            // Get next Appointment ID
-            txtApptID.Text = Appointment.GetNextAppointmentID().ToString("00");
-            // Load service names into cboServices combo box
-            Utility.LoadServiceNames(cboServices);
-            Utility.LoadAppointmentTimes(cboAppointmentTime);
+            // Enable ComboBoxes
+            cboAppointmentTime.Enabled = true;
+            cboDoctors.Enabled = true;
+            cboEquipmentName.Enabled = true;
         }
+
+        
+
+
+
+
 
         private void MakeAppointment_click(object sender, EventArgs e)
         {
@@ -168,12 +190,19 @@ namespace DiagnosticSYS
             return !string.IsNullOrWhiteSpace(email) && email.Length >= 7 && email.Length <= 30;
         }
 
-        private void dtmDate_ValueChanged(object sender, EventArgs e)
+        private void cboAppointmentTime_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Enable ComboBoxes
-            cboAppointmentTime.Enabled = true;
             cboDoctors.Enabled = true;
+        }
+
+        private void cboDoctors_SelectedIndexChanged(object sender, EventArgs e)
+        {
             cboEquipmentName.Enabled = true;
+        }
+
+        private void cboEquipmentName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            grpPatientDetails.Visible = true;
         }
     }
 }

@@ -46,7 +46,6 @@
             this.txtReferral = new System.Windows.Forms.TextBox();
             this.grpAppDetails = new System.Windows.Forms.GroupBox();
             this.cboEquipmentName = new System.Windows.Forms.ComboBox();
-            this.cboDoctors = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtServiceRate = new System.Windows.Forms.TextBox();
             this.dtmDate = new System.Windows.Forms.DateTimePicker();
@@ -60,6 +59,7 @@
             this.txtApptID = new System.Windows.Forms.TextBox();
             this.grpMakingAppointment = new System.Windows.Forms.GroupBox();
             this.cboAppointmentTime = new System.Windows.Forms.ComboBox();
+            this.cboDoctors = new System.Windows.Forms.ComboBox();
             this.mnuBack.SuspendLayout();
             this.grpPatientDetails.SuspendLayout();
             this.grpAppDetails.SuspendLayout();
@@ -240,9 +240,9 @@
             // 
             // grpAppDetails
             // 
+            this.grpAppDetails.Controls.Add(this.cboDoctors);
             this.grpAppDetails.Controls.Add(this.cboAppointmentTime);
             this.grpAppDetails.Controls.Add(this.cboEquipmentName);
-            this.grpAppDetails.Controls.Add(this.cboDoctors);
             this.grpAppDetails.Controls.Add(this.label1);
             this.grpAppDetails.Controls.Add(this.txtServiceRate);
             this.grpAppDetails.Controls.Add(this.dtmDate);
@@ -263,7 +263,6 @@
             // 
             // cboEquipmentName
             // 
-            this.cboEquipmentName.Enabled = false;
             this.cboEquipmentName.FormattingEnabled = true;
             this.cboEquipmentName.Items.AddRange(new object[] {
             "MRI Scanner MR01",
@@ -276,22 +275,7 @@
             this.cboEquipmentName.Name = "cboEquipmentName";
             this.cboEquipmentName.Size = new System.Drawing.Size(112, 28);
             this.cboEquipmentName.TabIndex = 177;
-            // 
-            // cboDoctors
-            // 
-            this.cboDoctors.Enabled = false;
-            this.cboDoctors.FormattingEnabled = true;
-            this.cboDoctors.Items.AddRange(new object[] {
-            "Dr. Smith",
-            "Dr. Brown",
-            "Dr. Wilson",
-            "Dr. Anderson",
-            "Dr. White"});
-            this.cboDoctors.Location = new System.Drawing.Point(213, 208);
-            this.cboDoctors.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cboDoctors.Name = "cboDoctors";
-            this.cboDoctors.Size = new System.Drawing.Size(135, 28);
-            this.cboDoctors.TabIndex = 174;
+            this.cboEquipmentName.SelectedIndexChanged += new System.EventHandler(this.cboEquipmentName_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -430,6 +414,17 @@
             this.cboAppointmentTime.Name = "cboAppointmentTime";
             this.cboAppointmentTime.Size = new System.Drawing.Size(147, 28);
             this.cboAppointmentTime.TabIndex = 178;
+            this.cboAppointmentTime.SelectedIndexChanged += new System.EventHandler(this.cboAppointmentTime_SelectedIndexChanged);
+            // 
+            // cboDoctors
+            // 
+            this.cboDoctors.FormattingEnabled = true;
+            this.cboDoctors.Location = new System.Drawing.Point(213, 205);
+            this.cboDoctors.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboDoctors.Name = "cboDoctors";
+            this.cboDoctors.Size = new System.Drawing.Size(147, 28);
+            this.cboDoctors.TabIndex = 179;
+            this.cboDoctors.SelectedIndexChanged += new System.EventHandler(this.cboDoctors_SelectedIndexChanged);
             // 
             // frmMakeAppointment
             // 
@@ -478,7 +473,6 @@
         private System.Windows.Forms.Label lblReferral;
         private System.Windows.Forms.GroupBox grpAppDetails;
         private System.Windows.Forms.ComboBox cboEquipmentName;
-        private System.Windows.Forms.ComboBox cboDoctors;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtServiceRate;
         private System.Windows.Forms.DateTimePicker dtmDate;
@@ -492,5 +486,6 @@
         private System.Windows.Forms.TextBox txtApptID;
         private System.Windows.Forms.GroupBox grpMakingAppointment;
         private System.Windows.Forms.ComboBox cboAppointmentTime;
+        private System.Windows.Forms.ComboBox cboDoctors;
     }
 }

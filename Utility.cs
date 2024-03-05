@@ -116,6 +116,16 @@ namespace DiagnosticSYS
             }
         }
 
+        public static void loadDoctors(ComboBox cboDoctors)
+        {
+            cboDoctors.Items.Clear();
+            cboDoctors.Items.Add("Freddie Mercury");
+            cboDoctors.Items.Add("Elvis Presley");
+            cboDoctors.Items.Add("Michael Jackson");
+            cboDoctors.Items.Add("Whitney Houston");
+            cboDoctors.Items.Add("Frank Sinatra");
+            cboDoctors.Items.Add("Bob Marley");
+        }
     }
 }
 
