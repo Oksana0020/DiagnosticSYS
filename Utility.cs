@@ -105,29 +105,25 @@ namespace DiagnosticSYS
             return cboRoomNumber;
         }
 
-        public static void LoadAppointmentTimes(ComboBox cboAppointmentTime)
-        {
-            // Clear the ComboBox
-            cboAppointmentTime.Items.Clear();
-            int startHour = 9;  
-            int endHour = 16;   
-
-            for (int hour = startHour; hour <= endHour; hour++)
-            {
-                cboAppointmentTime.Items.Add(hour.ToString("00") + ":00");
-                cboAppointmentTime.Items.Add(hour.ToString("00") + ":30");
-            }
-        }
-
-        public static void loadDoctors(ComboBox cboDoctors)
+        public static ComboBox loadDoctors(ComboBox cboDoctors)
         {
             cboDoctors.Items.Clear();
-            cboDoctors.Items.Add("Dr.Freddie Mercury");
-            cboDoctors.Items.Add("Dr.Elvis Presley");
-            cboDoctors.Items.Add("Dr.Michael Jackson");
-            cboDoctors.Items.Add("Dr.Whitney Houston");
-            cboDoctors.Items.Add("Dr.Frank Sinatra");
-            cboDoctors.Items.Add("Dr.Sting");
+            string strSQL = "SELECT DForename,DSurname FROM Doctors";
+
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+            conn.Open();
+
+            OracleCommand cmd = new OracleCommand(strSQL, conn);
+            OracleDataReader dr = cmd.ExecuteReader();
+            //reading room numbers and displaying in combo box
+
+            while (dr.Read())
+            {
+                cboDoctors.Items.Add(dr.GetString(0) + " " + dr.GetString(1));
+            }
+
+            conn.Close();
+            return cboDoctors;
         }
 
         public static ComboBox LoadAvailableTimes(ComboBox cboTimes, DateTime selectedDate)
