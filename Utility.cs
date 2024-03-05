@@ -11,6 +11,7 @@ namespace DiagnosticSYS
 {
     public static class Utility
     {
+
         public static ComboBox LoadEquipmentNames(ComboBox cboName)
         {
             cboName.Items.Clear();
@@ -127,6 +128,30 @@ namespace DiagnosticSYS
             cboDoctors.Items.Add("Dr.Whitney Houston");
             cboDoctors.Items.Add("Dr.Frank Sinatra");
             cboDoctors.Items.Add("Dr.Sting");
+        }
+
+        public static ComboBox LoadAvailableTimes(ComboBox cboTimes, DateTime selectedDate)
+        {
+            cboTimes.Items.Clear();
+            string strSQL = "SELECT AppTime FROM AppointmentTimes WHERE AppTime NOT IN " +
+                "(SELECT AppTime FROM Appointments WHERE AppDate = :selectedDate)";
+
+            
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+            conn.Open();
+
+            OracleCommand cmd = new OracleCommand(strSQL, conn);
+            cmd.Parameters.Add("selectedDate", OracleDbType.Date).Value = selectedDate;
+            OracleDataReader dr = cmd.ExecuteReader();
+
+            //reading available time slots and displaying in combo box
+            while (dr.Read())
+            {
+                cboTimes.Items.Add(dr.GetString(0));
+            }
+
+            conn.Close();
+            return cboTimes;
         }
     }
 }

@@ -39,7 +39,6 @@ namespace DiagnosticSYS
 
             // Load data into combo boxes
             Utility.LoadServiceNames(cboServices);
-            Utility.LoadAppointmentTimes(cboAppointmentTime);
             Utility.loadDoctors(cboDoctors);
 
             // Disable all ComboBoxes
@@ -47,6 +46,9 @@ namespace DiagnosticSYS
             cboDoctors.Enabled = false;
             cboEquipmentName.Enabled = false;
         }
+
+
+
         private void cboServices_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboServices.SelectedItem != null)
@@ -74,6 +76,14 @@ namespace DiagnosticSYS
         private void dtmDate_ValueChanged(object sender, EventArgs e)
         {
             cboAppointmentTime.Enabled = true;
+            LoadAvailableTimes();
+        }
+
+        private void LoadAvailableTimes()
+        {
+            cboAppointmentTime.Items.Clear();
+            DateTime selectedDate = dtmDate.Value;
+            Utility.LoadAvailableTimes(cboAppointmentTime, selectedDate);
         }
 
         private void cboAppointmentTime_SelectedIndexChanged(object sender, EventArgs e)
@@ -151,9 +161,21 @@ namespace DiagnosticSYS
                 return;
             }
 
-            MessageBox.Show("New appointment is successfully made.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            
+            // Create a new instance of Appointment
+            Appointment newAppointment = new Appointment(Convert.ToInt32(txtApptID.Text), cboServices.Text, Convert.ToDecimal(txtServiceRate.Text), dtmDate.Value,
+            cboDoctors.Text, cboEquipmentName.Text, txtPatientForename.Text, txtPatientSurname.Text, txtAddress.Text, Convert.ToInt32(txtPhone.Text),
+            txtEmail.Text, txtReferral.Text);
+
+
+
+            // Invoke the method to add the data to the Appointment table
+            newAppointment.MakeAppointment();
+
+            MessageBox.Show("New appointment added successfully", "Success",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             // Reset UI
+
             txtPatientForename.Clear();   
             txtPatientSurname.Clear();    
             txtAddress.Clear();           
