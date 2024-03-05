@@ -20,10 +20,6 @@ namespace DiagnosticSYS
         {
             InitializeComponent();
             this.parent = new mnuMainMenu();
-            cboServices.SelectedIndexChanged += cboServices_SelectedIndexChanged;
-            cboAppointmentTime.SelectedIndexChanged += cboAppointmentTime_SelectedIndexChanged;
-            cboDoctors.SelectedIndexChanged += cboDoctors_SelectedIndexChanged;
-            cboEquipmentName.SelectedIndexChanged += cboEquipmentName_SelectedIndexChanged;
         }
 
         private void mnuBack_Click(object sender, EventArgs e)
@@ -40,12 +36,13 @@ namespace DiagnosticSYS
 
             // Get next Appointment ID
             txtApptID.Text = Appointment.GetNextAppointmentID().ToString("00");
-            // Load service names into cboServices combo box
+
+            // Load data into combo boxes
             Utility.LoadServiceNames(cboServices);
             Utility.LoadAppointmentTimes(cboAppointmentTime);
             Utility.loadDoctors(cboDoctors);
 
-            // Disable all ComboBoxes initially
+            // Disable all ComboBoxes
             cboAppointmentTime.Enabled = false;
             cboDoctors.Enabled = false;
             cboEquipmentName.Enabled = false;
@@ -56,34 +53,43 @@ namespace DiagnosticSYS
             {
                 string selectedItem = cboServices.SelectedItem.ToString();
 
-                // Extract the service ID and name from the selected item
+                // extracting service ID and name from the selected item
                 int indexOfDash = selectedItem.IndexOf('-');
                 int serviceId = int.Parse(selectedItem.Substring(0, indexOfDash).Trim());
                 string serviceName = selectedItem.Substring(indexOfDash + 1).Trim();
 
-                // Create an instance of the Appointment class
+                // Create an instance of the Appointment
                 Appointment appointment = new Appointment();
 
-                // Retrieve the rate of the selected service from the database using the instance method
+                // retrieve rate of the selected service
                 decimal rate = appointment.GetServiceRate(serviceName);
 
-                // Display the rate in the txtServiceRate TextBox
+                // Display the rate
                 txtServiceRate.Text = rate.ToString("C");
 
-                // Make grpAppDetails visible
                 grpAppDetails.Visible = true;
             }
         }
 
         private void dtmDate_ValueChanged(object sender, EventArgs e)
         {
-            // Enable ComboBoxes
             cboAppointmentTime.Enabled = true;
+        }
+
+        private void cboAppointmentTime_SelectedIndexChanged(object sender, EventArgs e)
+        {
             cboDoctors.Enabled = true;
+        }
+
+        private void cboDoctors_SelectedIndexChanged(object sender, EventArgs e)
+        {
             cboEquipmentName.Enabled = true;
         }
 
-        
+        private void cboEquipmentName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            grpPatientDetails.Visible = true;
+        }
 
 
 
@@ -190,19 +196,5 @@ namespace DiagnosticSYS
             return !string.IsNullOrWhiteSpace(email) && email.Length >= 7 && email.Length <= 30;
         }
 
-        private void cboAppointmentTime_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cboDoctors.Enabled = true;
-        }
-
-        private void cboDoctors_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cboEquipmentName.Enabled = true;
-        }
-
-        private void cboEquipmentName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            grpPatientDetails.Visible = true;
-        }
     }
 }

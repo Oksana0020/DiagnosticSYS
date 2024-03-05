@@ -35,14 +35,11 @@ namespace DiagnosticSYS
             txtEquipmentID.Text = Equipment.getNextEquipmentID().ToString("000");
             // Load room numbers into cboRoomNumber combo box
             Utility.LoadRoomNumbers(cboRoomNumber);
-
-
         }
 
 
         private void btnRegisterNewEquipment(object sender, EventArgs e)
         {
-
             // Validate if all fields are entered
             if (string.IsNullOrWhiteSpace(txtEquipmentName.Text) ||
                 string.IsNullOrWhiteSpace(txtModel.Text) ||

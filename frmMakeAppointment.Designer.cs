@@ -74,7 +74,7 @@
             this.mnuBack.Location = new System.Drawing.Point(0, 0);
             this.mnuBack.Name = "mnuBack";
             this.mnuBack.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.mnuBack.Size = new System.Drawing.Size(869, 28);
+            this.mnuBack.Size = new System.Drawing.Size(869, 30);
             this.mnuBack.TabIndex = 7;
             this.mnuBack.Text = "mnuBack";
             // 
@@ -290,6 +290,7 @@
             // 
             // txtServiceRate
             // 
+            this.txtServiceRate.Enabled = false;
             this.txtServiceRate.Location = new System.Drawing.Point(213, 53);
             this.txtServiceRate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtServiceRate.MaxLength = 2;
@@ -303,10 +304,11 @@
             this.dtmDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtmDate.Location = new System.Drawing.Point(213, 110);
             this.dtmDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtmDate.MinDate = new System.DateTime(2024, 3, 5, 0, 0, 0, 0);
             this.dtmDate.Name = "dtmDate";
             this.dtmDate.Size = new System.Drawing.Size(135, 22);
             this.dtmDate.TabIndex = 170;
-            this.dtmDate.Value = new System.DateTime(2023, 11, 28, 0, 0, 0, 0);
+            this.dtmDate.Value = new System.DateTime(2024, 3, 5, 0, 0, 0, 0);
             this.dtmDate.ValueChanged += new System.EventHandler(this.dtmDate_ValueChanged);
             // 
             // lblEquipmentName

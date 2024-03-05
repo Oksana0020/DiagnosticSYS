@@ -104,8 +104,6 @@ namespace DiagnosticSYS
         {
             // Clear the ComboBox
             cboAppointmentTime.Items.Clear();
-
-            // start and end hours
             int startHour = 9;  
             int endHour = 16;   
 
@@ -119,12 +117,12 @@ namespace DiagnosticSYS
         public static void loadDoctors(ComboBox cboDoctors)
         {
             cboDoctors.Items.Clear();
-            cboDoctors.Items.Add("Freddie Mercury");
-            cboDoctors.Items.Add("Elvis Presley");
-            cboDoctors.Items.Add("Michael Jackson");
-            cboDoctors.Items.Add("Whitney Houston");
-            cboDoctors.Items.Add("Frank Sinatra");
-            cboDoctors.Items.Add("Bob Marley");
+            cboDoctors.Items.Add("Dr.Freddie Mercury");
+            cboDoctors.Items.Add("Dr.Elvis Presley");
+            cboDoctors.Items.Add("Dr.Michael Jackson");
+            cboDoctors.Items.Add("Dr.Whitney Houston");
+            cboDoctors.Items.Add("Dr.Frank Sinatra");
+            cboDoctors.Items.Add("Dr.Sting");
         }
     }
 }

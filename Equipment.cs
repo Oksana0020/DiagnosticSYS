@@ -189,7 +189,7 @@ namespace DiagnosticSYS
 
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
 
-            //Define the SQL query to be executed
+            //Define the SQL query
             String sqlQuery = "SELECT MAX(EquipmentId) FROM Equipments";
 
             //Execute the SQL query (OracleCommand)
@@ -198,7 +198,6 @@ namespace DiagnosticSYS
 
             OracleDataReader dr = cmd.ExecuteReader();
 
-            //Does dr contain a value or NULL?
             int nextId;
             dr.Read();
 
@@ -242,36 +241,40 @@ namespace DiagnosticSYS
         public static int GetEquipmentIDByName(string equipmentName)
         {
             int equipmentID = 0;
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+            OracleCommand cmd = new OracleCommand();
 
-            using (OracleConnection conn = new OracleConnection(DBConnect.oraDB))
+            try
             {
                 string sqlQuery = "SELECT EquipmentID FROM Equipments WHERE EquipmentName = :EquipmentName";
+                cmd.CommandText = sqlQuery;
+                cmd.Connection = conn;
+                cmd.Parameters.Add(new OracleParameter("EquipmentName", equipmentName));
 
-                using (OracleCommand cmd = new OracleCommand(sqlQuery, conn))
+                conn.Open();
+                object result = cmd.ExecuteScalar();
+
+                if (result != null)
                 {
-                    cmd.Parameters.Add(new OracleParameter("EquipmentName", equipmentName));
-
-                    try
-                    {
-
-                        conn.Open();
-
-                        object result = cmd.ExecuteScalar();
-
-                        if (result != null)
-                        {
-                            equipmentID = Convert.ToInt32(result);
-                        }
-                    }
-                    catch (OracleException ex)
-                    {
-                        Console.WriteLine($"Oracle Error: {ex.Message}");
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Error: {ex.Message}");
-                    }
+                    equipmentID = Convert.ToInt32(result);
                 }
+            }
+            catch (OracleException ex)
+            {
+                Console.WriteLine($"Oracle Error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+            finally
+            {
+                // Close connection and dispose command
+                if (conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+                cmd.Dispose();
             }
 
             return equipmentID;

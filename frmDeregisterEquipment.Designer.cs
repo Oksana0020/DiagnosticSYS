@@ -68,14 +68,14 @@
             this.bACKToolStripMenuItem1});
             this.mnuBack.Location = new System.Drawing.Point(0, 0);
             this.mnuBack.Name = "mnuBack";
-            this.mnuBack.Size = new System.Drawing.Size(800, 30);
+            this.mnuBack.Size = new System.Drawing.Size(800, 28);
             this.mnuBack.TabIndex = 4;
             this.mnuBack.Text = "mnuBack";
             // 
             // bACKToolStripMenuItem1
             // 
             this.bACKToolStripMenuItem1.Name = "bACKToolStripMenuItem1";
-            this.bACKToolStripMenuItem1.Size = new System.Drawing.Size(60, 26);
+            this.bACKToolStripMenuItem1.Size = new System.Drawing.Size(60, 24);
             this.bACKToolStripMenuItem1.Text = "BACK";
             this.bACKToolStripMenuItem1.Click += new System.EventHandler(this.mnuBack_Click);
             // 
@@ -124,6 +124,7 @@
             // 
             // txtEquipmentID
             // 
+            this.txtEquipmentID.Enabled = false;
             this.txtEquipmentID.Location = new System.Drawing.Point(178, 58);
             this.txtEquipmentID.Margin = new System.Windows.Forms.Padding(4);
             this.txtEquipmentID.MaxLength = 2;
@@ -133,6 +134,7 @@
             // 
             // dtpPurchaseDate
             // 
+            this.dtpPurchaseDate.Enabled = false;
             this.dtpPurchaseDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpPurchaseDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpPurchaseDate.Location = new System.Drawing.Point(512, 142);
@@ -143,6 +145,7 @@
             // 
             // txtRoomNumber
             // 
+            this.txtRoomNumber.Enabled = false;
             this.txtRoomNumber.Location = new System.Drawing.Point(512, 94);
             this.txtRoomNumber.Margin = new System.Windows.Forms.Padding(4);
             this.txtRoomNumber.MaxLength = 2;
@@ -176,6 +179,7 @@
             // 
             // txtPhoneNumber
             // 
+            this.txtPhoneNumber.Enabled = false;
             this.txtPhoneNumber.Location = new System.Drawing.Point(178, 217);
             this.txtPhoneNumber.Margin = new System.Windows.Forms.Padding(4);
             this.txtPhoneNumber.MaxLength = 10;
@@ -185,6 +189,7 @@
             // 
             // txtManufacturer
             // 
+            this.txtManufacturer.Enabled = false;
             this.txtManufacturer.Location = new System.Drawing.Point(178, 173);
             this.txtManufacturer.Margin = new System.Windows.Forms.Padding(4);
             this.txtManufacturer.MaxLength = 15;
@@ -206,6 +211,7 @@
             // 
             // txtEmail
             // 
+            this.txtEmail.Enabled = false;
             this.txtEmail.Location = new System.Drawing.Point(512, 51);
             this.txtEmail.Margin = new System.Windows.Forms.Padding(4);
             this.txtEmail.MaxLength = 30;
@@ -249,6 +255,7 @@
             // 
             // txtModel
             // 
+            this.txtModel.Enabled = false;
             this.txtModel.Location = new System.Drawing.Point(178, 132);
             this.txtModel.Margin = new System.Windows.Forms.Padding(4);
             this.txtModel.MaxLength = 10;
@@ -269,6 +276,7 @@
             // 
             // txtEquipmentNames
             // 
+            this.txtEquipmentNames.Enabled = false;
             this.txtEquipmentNames.Location = new System.Drawing.Point(178, 95);
             this.txtEquipmentNames.Margin = new System.Windows.Forms.Padding(4);
             this.txtEquipmentNames.MaxLength = 15;
