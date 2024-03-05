@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Oracle.ManagedDataAccess.Client;
 
 namespace DiagnosticSYS
@@ -86,28 +87,61 @@ namespace DiagnosticSYS
 
         public static int GetNextAppointmentID()
         {
-            // Open a database connection
-            using (OracleConnection conn = new OracleConnection(DBConnect.oraDB))
+            OracleConnection conn = null;
+            OracleCommand cmd = null;
+            int nextId = 0;
+
+            try
             {
+                // Create a new OracleConnection instance
+                conn = new OracleConnection(DBConnect.oraDB);
+
                 // Define the SQL query to be executed
                 string sqlQuery = "SELECT MAX(AppointmentID) FROM Appointments";
 
-                // Execute the SQL query
-                using (OracleCommand cmd = new OracleCommand(sqlQuery, conn))
+                // Create a new OracleCommand instance
+                cmd = new OracleCommand(sqlQuery, conn);
+
+                // Open the connection
+                conn.Open();
+
+                // Execute the command and get the result
+                object result = cmd.ExecuteScalar();
+
+                // Check if the result is DBNull or not
+                if (result == DBNull.Value)
                 {
-                    conn.Open();
-
-                    // Execute the query and get the result
-                    object result = cmd.ExecuteScalar();
-
-                    // Check if the result is DBNull or not
-                    if (result == DBNull.Value)
-                        return 1;
-                    else
-                        return Convert.ToInt32(result) + 1;
+                    nextId = 1;
+                }
+                else
+                {
+                    nextId = Convert.ToInt32(result) + 1;
                 }
             }
+            catch (Exception ex)
+            {
+                // Handle any exceptions
+                Console.WriteLine("Error retrieving next appointment ID: " + ex.Message);
+            }
+            finally
+            {
+                // Close the command if it's not null
+                if (cmd != null)
+                {
+                    cmd.Dispose();
+                }
+
+                // Close the connection if it's open
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+
+            // Return the next ID
+            return nextId;
         }
+
 
         // Method to get all appoinments
         public static DataSet GetAllAppointments()
@@ -310,6 +344,61 @@ namespace DiagnosticSYS
                 }
             }
         }
+        // Method to retrieve the service rate
+        public decimal GetServiceRate(string selectedService)
+        {
+            // Initialize the rate variable
+            decimal rate = 0;
+
+            // Open a database connection
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+
+            // Define the SQL query to be executed
+            string sqlQuery = "SELECT Rate FROM Services WHERE ServiceName = :selectedService";
+
+            // Execute the SQL query (OracleCommand)
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+
+            try
+            {
+                // Open the connection
+                conn.Open();
+
+                // Add parameter to the command
+                cmd.Parameters.Add("selectedService", OracleDbType.Varchar2).Value = selectedService;
+
+                // Execute the query and get the result
+                object result = cmd.ExecuteScalar();
+
+                // Check if the result is not null and convert it to decimal
+                if (result != null && result != DBNull.Value)
+                {
+                    rate = Convert.ToDecimal(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Display error message if an exception occurs
+                MessageBox.Show("Error retrieving service rate: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // Close the command and connection
+                if (cmd != null)
+                {
+                    cmd.Dispose();
+                }
+
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+
+            // Return the rate
+            return rate;
+        }
+
     }
 }
 

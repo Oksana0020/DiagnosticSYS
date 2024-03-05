@@ -99,6 +99,23 @@ namespace DiagnosticSYS
             conn.Close();
             return cboRoomNumber;
         }
+
+        public static void LoadAppointmentTimes(ComboBox cboAppointmentTime)
+        {
+            // Clear the ComboBox
+            cboAppointmentTime.Items.Clear();
+
+            // start and end hours
+            int startHour = 9;  
+            int endHour = 16;   
+
+            for (int hour = startHour; hour <= endHour; hour++)
+            {
+                cboAppointmentTime.Items.Add(hour.ToString("00") + ":00");
+                cboAppointmentTime.Items.Add(hour.ToString("00") + ":30");
+            }
+        }
+
     }
 }
 

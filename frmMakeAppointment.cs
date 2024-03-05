@@ -23,6 +23,12 @@ namespace DiagnosticSYS
             //cboServices.SelectedIndexChanged += cboServices_SelectedIndexChanged;
         }
 
+        private void mnuBack_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            parent.Visible = true;
+        }
+
         private void cboServices_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboServices.SelectedItem != null)
@@ -34,8 +40,11 @@ namespace DiagnosticSYS
                 int serviceId = int.Parse(selectedItem.Substring(0, indexOfDash).Trim());
                 string serviceName = selectedItem.Substring(indexOfDash + 1).Trim();
 
-                // Retrieve the rate of the selected service from the database
-                decimal rate = GetServiceRateFromDatabase(serviceName);
+                // Create an instance of the Appointment class
+                Appointment appointment = new Appointment();
+
+                // Retrieve the rate of the selected service from the database using the instance method
+                decimal rate = appointment.GetServiceRate(serviceName);
 
                 // Display the rate in the txtServiceRate TextBox
                 txtServiceRate.Text = rate.ToString("C");
@@ -43,42 +52,6 @@ namespace DiagnosticSYS
                 // Make grpAppDetails visible
                 grpAppDetails.Visible = true;
             }
-        }
-
-        // Method to retrieve the service rate from the database
-        private decimal GetServiceRateFromDatabase(string selectedService)
-        {
-            decimal rate = 0;
-            string sqlQuery = "SELECT Rate FROM Services WHERE ServiceName = :selectedService";
-
-            try
-            {
-                using (OracleConnection conn = new OracleConnection(DBConnect.oraDB))
-                {
-                    conn.Open();
-                    using (OracleCommand cmd = new OracleCommand(sqlQuery, conn))
-                    {
-                        cmd.Parameters.Add("selectedService", OracleDbType.Varchar2).Value = selectedService;
-                        object result = cmd.ExecuteScalar();
-                        if (result != null && result != DBNull.Value)
-                        {
-                            rate = Convert.ToDecimal(result);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error retrieving service rate: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return rate;
-        }
-
-        private void mnuBack_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            parent.Visible = true;
         }
 
         private void frmMakeAppointment_Load_1(object sender, EventArgs e)
@@ -91,6 +64,7 @@ namespace DiagnosticSYS
             txtApptID.Text = Appointment.GetNextAppointmentID().ToString("00");
             // Load service names into cboServices combo box
             Utility.LoadServiceNames(cboServices);
+            Utility.LoadAppointmentTimes(cboAppointmentTime);
         }
 
         private void MakeAppointment_click(object sender, EventArgs e)

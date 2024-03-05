@@ -49,7 +49,6 @@
             this.cboDoctors = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtServiceRate = new System.Windows.Forms.TextBox();
-            this.cboAppointmentTime = new System.Windows.Forms.ComboBox();
             this.dtmDate = new System.Windows.Forms.DateTimePicker();
             this.lblEquipmentName = new System.Windows.Forms.Label();
             this.lblAppointmentTime = new System.Windows.Forms.Label();
@@ -60,6 +59,7 @@
             this.cboServices = new System.Windows.Forms.ComboBox();
             this.txtApptID = new System.Windows.Forms.TextBox();
             this.grpMakingAppointment = new System.Windows.Forms.GroupBox();
+            this.cboAppointmentTime = new System.Windows.Forms.ComboBox();
             this.mnuBack.SuspendLayout();
             this.grpPatientDetails.SuspendLayout();
             this.grpAppDetails.SuspendLayout();
@@ -240,11 +240,11 @@
             // 
             // grpAppDetails
             // 
+            this.grpAppDetails.Controls.Add(this.cboAppointmentTime);
             this.grpAppDetails.Controls.Add(this.cboEquipmentName);
             this.grpAppDetails.Controls.Add(this.cboDoctors);
             this.grpAppDetails.Controls.Add(this.label1);
             this.grpAppDetails.Controls.Add(this.txtServiceRate);
-            this.grpAppDetails.Controls.Add(this.cboAppointmentTime);
             this.grpAppDetails.Controls.Add(this.dtmDate);
             this.grpAppDetails.Controls.Add(this.lblEquipmentName);
             this.grpAppDetails.Controls.Add(this.lblAppointmentTime);
@@ -312,34 +312,6 @@
             this.txtServiceRate.Name = "txtServiceRate";
             this.txtServiceRate.Size = new System.Drawing.Size(87, 27);
             this.txtServiceRate.TabIndex = 172;
-            // 
-            // cboAppointmentTime
-            // 
-            this.cboAppointmentTime.Enabled = false;
-            this.cboAppointmentTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboAppointmentTime.FormattingEnabled = true;
-            this.cboAppointmentTime.Items.AddRange(new object[] {
-            "09:00",
-            "09:30",
-            "10:00",
-            "10:30",
-            "11:00",
-            "11:30",
-            "12:00",
-            "12:30",
-            "14:00",
-            "14:30",
-            "15:00",
-            "15:30",
-            "16:00",
-            "16:30",
-            "17:00",
-            "17:30"});
-            this.cboAppointmentTime.Location = new System.Drawing.Point(213, 160);
-            this.cboAppointmentTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cboAppointmentTime.Name = "cboAppointmentTime";
-            this.cboAppointmentTime.Size = new System.Drawing.Size(121, 24);
-            this.cboAppointmentTime.TabIndex = 171;
             // 
             // dtmDate
             // 
@@ -450,6 +422,15 @@
             this.grpMakingAppointment.TabStop = false;
             this.grpMakingAppointment.Text = "Making New Appointment";
             // 
+            // cboAppointmentTime
+            // 
+            this.cboAppointmentTime.FormattingEnabled = true;
+            this.cboAppointmentTime.Location = new System.Drawing.Point(213, 156);
+            this.cboAppointmentTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboAppointmentTime.Name = "cboAppointmentTime";
+            this.cboAppointmentTime.Size = new System.Drawing.Size(147, 28);
+            this.cboAppointmentTime.TabIndex = 178;
+            // 
             // frmMakeAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -500,7 +481,6 @@
         private System.Windows.Forms.ComboBox cboDoctors;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtServiceRate;
-        private System.Windows.Forms.ComboBox cboAppointmentTime;
         private System.Windows.Forms.DateTimePicker dtmDate;
         private System.Windows.Forms.Label lblEquipmentName;
         private System.Windows.Forms.Label lblAppointmentTime;
@@ -511,5 +491,6 @@
         private System.Windows.Forms.ComboBox cboServices;
         private System.Windows.Forms.TextBox txtApptID;
         private System.Windows.Forms.GroupBox grpMakingAppointment;
+        private System.Windows.Forms.ComboBox cboAppointmentTime;
     }
 }
