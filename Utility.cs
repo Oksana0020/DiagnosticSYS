@@ -48,7 +48,11 @@ namespace DiagnosticSYS
             //reading equipment names and adding them in combo box
             while (dr.Read())
             {
-                cboServices.Items.Add(dr.GetInt32(0).ToString() + " - " + dr.GetString(1));
+                int serviceId = dr.GetInt32(0);
+                string formattedServiceId = serviceId.ToString().PadLeft(3, '0'); 
+                string serviceName = dr.GetString(1);
+
+                cboServices.Items.Add(formattedServiceId + " - " + serviceName);
             }
 
             conn.Close();
