@@ -42,9 +42,10 @@ namespace DiagnosticSYS
             Utility.loadDoctors(cboDoctors);
 
             // Disable all ComboBoxes
-            cboAppointmentTime.Enabled = false;
+            //cboAppointmentTime.Enabled = false;
             cboDoctors.Enabled = false;
             cboEquipmentName.Enabled = false;
+
         }
 
 
@@ -67,16 +68,18 @@ namespace DiagnosticSYS
                 decimal rate = appointment.GetServiceRate(serviceName);
 
                 // Display the rate
-                txtServiceRate.Text = rate.ToString("C");
+                txtServiceRate.Text = rate.ToString("0.00");
 
                 grpAppDetails.Visible = true;
+
+                LoadAvailableTimes();
             }
         }
 
         private void dtmDate_ValueChanged(object sender, EventArgs e)
         {
             cboAppointmentTime.Enabled = true;
-            LoadAvailableTimes();
+            
         }
 
         private void LoadAvailableTimes()
@@ -162,9 +165,26 @@ namespace DiagnosticSYS
             }
 
             // Create a new instance of Appointment
-            Appointment newAppointment = new Appointment(Convert.ToInt32(txtApptID.Text), cboServices.Text, Convert.ToDecimal(txtServiceRate.Text), dtmDate.Value,
-            cboDoctors.Text, cboEquipmentName.Text, txtPatientForename.Text, txtPatientSurname.Text, txtAddress.Text, Convert.ToInt32(txtPhone.Text),
-            txtEmail.Text, txtReferral.Text);
+            // Create a new instance of Appointment
+            Appointment newAppointment = new Appointment(
+                Convert.ToInt32(txtApptID.Text), 
+                cboServices.Text, // serviceName
+                Convert.ToDecimal(txtServiceRate.Text), 
+                dtmDate.Value.Date, 
+                cboAppointmentTime.Text, 
+                cboDoctors.Text, 
+                cboEquipmentName.Text, 
+                txtPatientForename.Text, 
+                txtPatientSurname.Text, 
+                txtAddress.Text, 
+                Convert.ToInt32(txtPhone.Text), 
+                txtEmail.Text, 
+                txtReferral.Text, 
+                "M", 
+                0, // patientID 
+                0, // serviceID
+                0 // doctorID 
+            );
 
 
 

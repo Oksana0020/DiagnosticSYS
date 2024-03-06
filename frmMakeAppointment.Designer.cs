@@ -45,6 +45,8 @@
             this.lblReferral = new System.Windows.Forms.Label();
             this.txtReferral = new System.Windows.Forms.TextBox();
             this.grpAppDetails = new System.Windows.Forms.GroupBox();
+            this.cboDoctors = new System.Windows.Forms.ComboBox();
+            this.cboAppointmentTime = new System.Windows.Forms.ComboBox();
             this.cboEquipmentName = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtServiceRate = new System.Windows.Forms.TextBox();
@@ -58,8 +60,6 @@
             this.cboServices = new System.Windows.Forms.ComboBox();
             this.txtApptID = new System.Windows.Forms.TextBox();
             this.grpMakingAppointment = new System.Windows.Forms.GroupBox();
-            this.cboAppointmentTime = new System.Windows.Forms.ComboBox();
-            this.cboDoctors = new System.Windows.Forms.ComboBox();
             this.mnuBack.SuspendLayout();
             this.grpPatientDetails.SuspendLayout();
             this.grpAppDetails.SuspendLayout();
@@ -74,7 +74,7 @@
             this.mnuBack.Location = new System.Drawing.Point(0, 0);
             this.mnuBack.Name = "mnuBack";
             this.mnuBack.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.mnuBack.Size = new System.Drawing.Size(869, 30);
+            this.mnuBack.Size = new System.Drawing.Size(869, 28);
             this.mnuBack.TabIndex = 7;
             this.mnuBack.Text = "mnuBack";
             // 
@@ -114,7 +114,7 @@
             // txtAddress
             // 
             this.txtAddress.Location = new System.Drawing.Point(143, 131);
-            this.txtAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAddress.Margin = new System.Windows.Forms.Padding(4);
             this.txtAddress.MaxLength = 30;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(213, 27);
@@ -133,7 +133,7 @@
             // txtPhone
             // 
             this.txtPhone.Location = new System.Drawing.Point(195, 184);
-            this.txtPhone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPhone.Margin = new System.Windows.Forms.Padding(4);
             this.txtPhone.MaxLength = 10;
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(161, 27);
@@ -142,7 +142,7 @@
             // txtEmail
             // 
             this.txtEmail.Location = new System.Drawing.Point(143, 240);
-            this.txtEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(4);
             this.txtEmail.MaxLength = 30;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(213, 27);
@@ -172,7 +172,7 @@
             // txtPatientSurname
             // 
             this.txtPatientSurname.Location = new System.Drawing.Point(195, 89);
-            this.txtPatientSurname.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPatientSurname.Margin = new System.Windows.Forms.Padding(4);
             this.txtPatientSurname.MaxLength = 15;
             this.txtPatientSurname.Name = "txtPatientSurname";
             this.txtPatientSurname.Size = new System.Drawing.Size(161, 27);
@@ -191,7 +191,7 @@
             // txtPatientForename
             // 
             this.txtPatientForename.Location = new System.Drawing.Point(195, 43);
-            this.txtPatientForename.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPatientForename.Margin = new System.Windows.Forms.Padding(4);
             this.txtPatientForename.MaxLength = 15;
             this.txtPatientForename.Name = "txtPatientForename";
             this.txtPatientForename.Size = new System.Drawing.Size(161, 27);
@@ -232,7 +232,7 @@
             // txtReferral
             // 
             this.txtReferral.Location = new System.Drawing.Point(195, 294);
-            this.txtReferral.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtReferral.Margin = new System.Windows.Forms.Padding(4);
             this.txtReferral.MaxLength = 15;
             this.txtReferral.Name = "txtReferral";
             this.txtReferral.Size = new System.Drawing.Size(161, 27);
@@ -252,14 +252,34 @@
             this.grpAppDetails.Controls.Add(this.lblAppointmentDate);
             this.grpAppDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold);
             this.grpAppDetails.Location = new System.Drawing.Point(27, 238);
-            this.grpAppDetails.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpAppDetails.Margin = new System.Windows.Forms.Padding(4);
             this.grpAppDetails.Name = "grpAppDetails";
-            this.grpAppDetails.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpAppDetails.Padding = new System.Windows.Forms.Padding(4);
             this.grpAppDetails.Size = new System.Drawing.Size(397, 368);
             this.grpAppDetails.TabIndex = 139;
             this.grpAppDetails.TabStop = false;
             this.grpAppDetails.Text = "Appointment Details";
             this.grpAppDetails.Visible = false;
+            // 
+            // cboDoctors
+            // 
+            this.cboDoctors.FormattingEnabled = true;
+            this.cboDoctors.Location = new System.Drawing.Point(213, 205);
+            this.cboDoctors.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboDoctors.Name = "cboDoctors";
+            this.cboDoctors.Size = new System.Drawing.Size(147, 28);
+            this.cboDoctors.TabIndex = 179;
+            this.cboDoctors.SelectedIndexChanged += new System.EventHandler(this.cboDoctors_SelectedIndexChanged);
+            // 
+            // cboAppointmentTime
+            // 
+            this.cboAppointmentTime.FormattingEnabled = true;
+            this.cboAppointmentTime.Location = new System.Drawing.Point(213, 156);
+            this.cboAppointmentTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboAppointmentTime.Name = "cboAppointmentTime";
+            this.cboAppointmentTime.Size = new System.Drawing.Size(147, 28);
+            this.cboAppointmentTime.TabIndex = 178;
+            this.cboAppointmentTime.SelectedIndexChanged += new System.EventHandler(this.cboAppointmentTime_SelectedIndexChanged);
             // 
             // cboEquipmentName
             // 
@@ -292,7 +312,7 @@
             // 
             this.txtServiceRate.Enabled = false;
             this.txtServiceRate.Location = new System.Drawing.Point(213, 53);
-            this.txtServiceRate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtServiceRate.Margin = new System.Windows.Forms.Padding(4);
             this.txtServiceRate.MaxLength = 2;
             this.txtServiceRate.Name = "txtServiceRate";
             this.txtServiceRate.Size = new System.Drawing.Size(87, 27);
@@ -386,7 +406,7 @@
             // txtApptID
             // 
             this.txtApptID.Location = new System.Drawing.Point(261, 40);
-            this.txtApptID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtApptID.Margin = new System.Windows.Forms.Padding(4);
             this.txtApptID.MaxLength = 2;
             this.txtApptID.Name = "txtApptID";
             this.txtApptID.Size = new System.Drawing.Size(87, 27);
@@ -407,26 +427,6 @@
             this.grpMakingAppointment.TabIndex = 138;
             this.grpMakingAppointment.TabStop = false;
             this.grpMakingAppointment.Text = "Making New Appointment";
-            // 
-            // cboAppointmentTime
-            // 
-            this.cboAppointmentTime.FormattingEnabled = true;
-            this.cboAppointmentTime.Location = new System.Drawing.Point(213, 156);
-            this.cboAppointmentTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cboAppointmentTime.Name = "cboAppointmentTime";
-            this.cboAppointmentTime.Size = new System.Drawing.Size(147, 28);
-            this.cboAppointmentTime.TabIndex = 178;
-            this.cboAppointmentTime.SelectedIndexChanged += new System.EventHandler(this.cboAppointmentTime_SelectedIndexChanged);
-            // 
-            // cboDoctors
-            // 
-            this.cboDoctors.FormattingEnabled = true;
-            this.cboDoctors.Location = new System.Drawing.Point(213, 205);
-            this.cboDoctors.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cboDoctors.Name = "cboDoctors";
-            this.cboDoctors.Size = new System.Drawing.Size(147, 28);
-            this.cboDoctors.TabIndex = 179;
-            this.cboDoctors.SelectedIndexChanged += new System.EventHandler(this.cboDoctors_SelectedIndexChanged);
             // 
             // frmMakeAppointment
             // 

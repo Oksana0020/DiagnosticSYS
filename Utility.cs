@@ -88,7 +88,7 @@ namespace DiagnosticSYS
         {
             cboRoomNumber.Items.Clear();
 
-            string strSQL = "SELECT RoomNo FROM Rooms";
+            string strSQL = "SELECT RoomNo FROM Rooms WHERE RoomNo NOT IN (SELECT RoomNo FROM Equipment) ORDER BY RoomNo";
 
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
             conn.Open();
@@ -132,7 +132,6 @@ namespace DiagnosticSYS
             string strSQL = "SELECT AppTime FROM AppointmentTimes WHERE AppTime NOT IN " +
                 "(SELECT AppTime FROM Appointments WHERE AppDate = :selectedDate)";
 
-            
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
             conn.Open();
 
