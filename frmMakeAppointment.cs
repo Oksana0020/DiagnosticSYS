@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Oracle.ManagedDataAccess.Client;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
@@ -18,10 +19,8 @@ namespace DiagnosticSYS
         public frmMakeAppointment()
         {
             InitializeComponent();
-            cboServices.Items.AddRange(new object[] { "MRI", "X-Ray", "CT", "Ultrasound", "Fluoroscopy" });
             this.parent = new mnuMainMenu();
         }
-
 
         private void mnuBack_Click(object sender, EventArgs e)
         {
@@ -29,68 +28,85 @@ namespace DiagnosticSYS
             parent.Visible = true;
         }
 
-        private void frmMakeAppointment_Load(object sender, EventArgs e)
+        private void frmMakeAppointment_Load_1(object sender, EventArgs e)
         {
             grpMakingAppointment.Visible = true;
-            grpPatientDetails.Visible = true;
+            grpPatientDetails.Visible = false;
+            cboEquipmentName = Utility.LoadEquipmentNames(cboEquipmentName);
 
-            // Get next Service ID
-            //txtApptID.Text = Service.GetNexttxtxApptID().ToString("00");
-            // Load service names into cboServices combo box
-            //Utility.LoadEquipmentNames(cboServices);
+            // Get next Appointment ID
+            txtApptID.Text = Appointment.GetNextAppointmentID().ToString("00");
+
+            // Load data into combo boxes
+            Utility.LoadServiceNames(cboServices);
+            Utility.loadDoctors(cboDoctors);
+
+            // Disable all ComboBoxes
+            //cboAppointmentTime.Enabled = false;
+            cboDoctors.Enabled = false;
+            cboEquipmentName.Enabled = false;
+
         }
+
 
 
         private void cboServices_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DisplayServiceRate();
-            grpAppDetails.Visible = true;
-        }
-        private void DisplayServiceRate()
-        {
-            string selectedService = cboServices.SelectedItem?.ToString();
-            double rate = GetServiceRate(selectedService);
-            string serviceID = GetServiceID(selectedService);
-              txtServiceRate.Text = rate.ToString("C"); 
-        }
-
-        private double GetServiceRate(string service)
-        {
-            switch (service)
+            if (cboServices.SelectedItem != null)
             {
-                case "MRI":
-                    return 500.0;
-                case "X-Ray":
-                    return 200.0;
-                case "CT":
-                    return 700.0;
-                case "Ultrasound":
-                    return 300.0;
-                case "Fluoroscopy":
-                    return 400.0;
-                default:
-                    return 0.0; 
+                string selectedItem = cboServices.SelectedItem.ToString();
+
+                // extracting service ID and name from the selected item
+                int indexOfDash = selectedItem.IndexOf('-');
+                int serviceId = int.Parse(selectedItem.Substring(0, indexOfDash).Trim());
+                string serviceName = selectedItem.Substring(indexOfDash + 1).Trim();
+
+                // Create an instance of the Appointment
+                Appointment appointment = new Appointment();
+
+                // retrieve rate of the selected service
+                decimal rate = appointment.GetServiceRate(serviceName);
+
+                // Display the rate
+                txtServiceRate.Text = rate.ToString("0.00");
+
+                grpAppDetails.Visible = true;
+
+                LoadAvailableTimes();
             }
         }
 
-        private string GetServiceID(string service)
+        private void dtmDate_ValueChanged(object sender, EventArgs e)
         {
-            switch (service)
-            {
-                case "MRI":
-                    return "001";
-                case "X-Ray":
-                    return "002";
-                case "CT":
-                    return "003";
-                case "Ultrasound":
-                    return "004";
-                case "Fluoroscopy":
-                    return "005";
-                default:
-                    return string.Empty;
-            }
+            cboAppointmentTime.Enabled = true;
+            
         }
+
+        private void LoadAvailableTimes()
+        {
+            cboAppointmentTime.Items.Clear();
+            DateTime selectedDate = dtmDate.Value;
+            Utility.LoadAvailableTimes(cboAppointmentTime, selectedDate);
+        }
+
+        private void cboAppointmentTime_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cboDoctors.Enabled = true;
+        }
+
+        private void cboDoctors_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cboEquipmentName.Enabled = true;
+        }
+
+        private void cboEquipmentName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            grpPatientDetails.Visible = true;
+        }
+
+
+
+
 
         private void MakeAppointment_click(object sender, EventArgs e)
         {
@@ -148,9 +164,38 @@ namespace DiagnosticSYS
                 return;
             }
 
-            MessageBox.Show("New appointment is successfully made.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            
+            // Create a new instance of Appointment
+            // Create a new instance of Appointment
+            Appointment newAppointment = new Appointment(
+                Convert.ToInt32(txtApptID.Text), 
+                cboServices.Text, // serviceName
+                Convert.ToDecimal(txtServiceRate.Text), 
+                dtmDate.Value.Date, 
+                cboAppointmentTime.Text, 
+                cboDoctors.Text, 
+                cboEquipmentName.Text, 
+                txtPatientForename.Text, 
+                txtPatientSurname.Text, 
+                txtAddress.Text, 
+                Convert.ToInt32(txtPhone.Text), 
+                txtEmail.Text, 
+                txtReferral.Text, 
+                "M", 
+                0, // patientID 
+                0, // serviceID
+                0 // doctorID 
+            );
+
+
+
+            // Invoke the method to add the data to the Appointment table
+            newAppointment.MakeAppointment();
+
+            MessageBox.Show("New appointment added successfully", "Success",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             // Reset UI
+
             txtPatientForename.Clear();   
             txtPatientSurname.Clear();    
             txtAddress.Clear();           
@@ -193,9 +238,5 @@ namespace DiagnosticSYS
             return !string.IsNullOrWhiteSpace(email) && email.Length >= 7 && email.Length <= 30;
         }
 
-        private void frmMakeAppointment_Load_1(object sender, EventArgs e)
-        {
-            cboEquipmentName = Utility.LoadEquipmentNames(cboEquipmentName);
-        }
     }
 }
