@@ -52,9 +52,9 @@ namespace DiagnosticSYS
             this.appStatus = "A";
         }
 
-        public Appointment(int appointmentID, string serviceName, decimal rate, DateTime appointmentDate, 
-        string appointmentTime,string doctor,
-        string equipmentName, string patientForename, string patientSurname, string address, int phone, string email, string referral, 
+        public Appointment(int appointmentID, string serviceName, decimal rate, DateTime appointmentDate,
+        string appointmentTime, string doctor,
+        string equipmentName, string patientForename, string patientSurname, string address, int phone, string email, string referral,
         string appStatus, int patientID, int serviceID, int doctorID)
         {
             this.appointmentID = appointmentID;
@@ -73,7 +73,7 @@ namespace DiagnosticSYS
             this.appStatus = appStatus;
             this.patientID = patientID;
             this.serviceID = serviceID;
-            this.doctorID = doctorID;   
+            this.doctorID = doctorID;
         }
 
         // Getters 

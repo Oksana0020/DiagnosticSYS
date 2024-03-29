@@ -18,7 +18,7 @@ namespace DiagnosticSYS
             InitializeComponent();
             this.parent = new mnuMainMenu();
         }
-        
+
         private void mnuBack_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -44,7 +44,7 @@ namespace DiagnosticSYS
                 string.IsNullOrWhiteSpace(txtRate.Text) ||
                 cboEquipment.SelectedItem == null)
             {
-                MessageBox.Show("All fields must be entered!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("All fields must be entered!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -95,8 +95,8 @@ namespace DiagnosticSYS
             // Extract ServiceID and parse it to an integer
             int equipmentID = int.Parse(selectedEquipmentName.Substring(0, 3));
             //Create an instance of Service
-            Service newService = new Service(Convert.ToInt32(txtServiceID.Text),txtServiceName.Text,txtDescription.Text,
-            rate,"A",equipmentID);
+            Service newService = new Service(Convert.ToInt32(txtServiceID.Text), txtServiceName.Text, txtDescription.Text,
+            rate, "A", equipmentID);
 
             // Invoke the method to add the data to the Services table
             newService.AddService();

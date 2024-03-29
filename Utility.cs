@@ -50,7 +50,7 @@ namespace DiagnosticSYS
             while (dr.Read())
             {
                 int serviceId = dr.GetInt32(0);
-                string formattedServiceId = serviceId.ToString().PadLeft(3, '0'); 
+                string formattedServiceId = serviceId.ToString().PadLeft(3, '0');
                 string serviceName = dr.GetString(1);
 
                 cboServices.Items.Add(formattedServiceId + " - " + serviceName);
@@ -88,8 +88,8 @@ namespace DiagnosticSYS
         {
             cboRoomNumber.Items.Clear();
 
-            //string strSQL = "SELECT RoomNo FROM Rooms WHERE RoomNo NOT IN (SELECT RoomNo FROM Equipment) ORDER BY RoomNo";
-            string strSQL = "SELECT RoomNo FROM Rooms";
+            string strSQL = "SELECT RoomNo FROM Rooms WHERE RoomNo NOT IN (SELECT RoomNo FROM Equipment) ORDER BY RoomNo";
+            //string strSQL = "SELECT RoomNo FROM Rooms";
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
             conn.Open();
 

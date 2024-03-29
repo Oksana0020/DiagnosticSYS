@@ -34,7 +34,7 @@ namespace DiagnosticSYS
             grpMakingAppointment.Visible = true;
             grpPatientDetails.Visible = false;
             cboEquipmentName = Utility.LoadEquipmentNames(cboEquipmentName);
-            
+
 
             // Get next Appointment ID
             txtApptID.Text = Appointment.GetNextAppointmentID().ToString("00");
@@ -81,7 +81,7 @@ namespace DiagnosticSYS
         private void dtmDate_ValueChanged(object sender, EventArgs e)
         {
             cboAppointmentTime.Enabled = true;
-            
+
         }
 
         private void LoadAvailableTimes()
@@ -106,9 +106,6 @@ namespace DiagnosticSYS
             grpPatientDetails.Visible = true;
             txtPatientID.Text = Appointment.GetNextPatientID().ToString("00");
         }
-
-
-
 
 
         private void MakeAppointment_click(object sender, EventArgs e)

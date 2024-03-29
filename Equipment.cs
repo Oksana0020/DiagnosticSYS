@@ -30,7 +30,7 @@ namespace DiagnosticSYS
             this.manEmail = "";
             this.roomNo = 0;
             this.eqPurchaseDate = DateTime.Now;
-            this.eqStatus = "A"; 
+            this.eqStatus = "A";
         }
 
         public Equipment(decimal equipmentID, string equipmentName, string model, string manufacturer, decimal manPhoneNumber, string manEmail, decimal roomNo, DateTime eqPurchaseDate, string eqStatus)
@@ -68,7 +68,7 @@ namespace DiagnosticSYS
         public void SetEqPurchaseDate(DateTime eqPurchaseDate) { this.eqPurchaseDate = eqPurchaseDate; }
         public void SetEqStatus(string eqStatus) { this.eqStatus = eqStatus; }
 
-        
+
         public void getEquipment(decimal Id)
         {
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
@@ -171,7 +171,7 @@ namespace DiagnosticSYS
                 "ManPhoneNumber = " + this.manPhoneNumber + ", " +
                 "ManEmail = '" + this.manEmail + "', " +
                 "RoomNo = " + this.roomNo + ", " +
-                "EqPurchaseDate = '" + formattedDate + "', " + 
+                "EqPurchaseDate = '" + formattedDate + "', " +
                 "EqStatus = '" + this.eqStatus + "' " +
                 "WHERE EquipmentID = " + this.equipmentID;
 
@@ -282,4 +282,4 @@ namespace DiagnosticSYS
     }
 }
 
-    
+

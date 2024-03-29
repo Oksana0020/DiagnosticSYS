@@ -102,7 +102,7 @@ namespace DiagnosticSYS
 
             conn.Close();
         }
-       
+
         //Method to update service
         public void UpdateService()
         {
@@ -140,7 +140,7 @@ namespace DiagnosticSYS
         }
 
         //method to find service
-            public static DataSet findServices(string serviceName)
+        public static DataSet findServices(string serviceName)
         {
 
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
