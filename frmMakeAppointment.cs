@@ -34,7 +34,6 @@ namespace DiagnosticSYS
             grpMakingAppointment.Visible = true;
             grpPatientDetails.Visible = false;
             cboEquipmentName = Utility.LoadEquipmentNames(cboEquipmentName);
-            
 
 
             // Get next Appointment ID
@@ -107,9 +106,6 @@ namespace DiagnosticSYS
             grpPatientDetails.Visible = true;
             txtPatientID.Text = Appointment.GetNextPatientID().ToString("00");
         }
-
-
-
 
 
         private void MakeAppointment_click(object sender, EventArgs e)
