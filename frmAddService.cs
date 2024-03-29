@@ -91,8 +91,9 @@ namespace DiagnosticSYS
 
             //getting the selected equipment name and corresponding equipment ID
             string selectedEquipmentName = cboEquipment.SelectedItem.ToString();
-            int equipmentID = Equipment.GetEquipmentIDByName(selectedEquipmentName);
-
+            //int equipmentID = Equipment.GetEquipmentIDByName(selectedEquipmentName);
+            // Extract ServiceID and parse it to an integer
+            int equipmentID = int.Parse(selectedEquipmentName.Substring(0, 3));
             //Create an instance of Service
             Service newService = new Service(Convert.ToInt32(txtServiceID.Text),txtServiceName.Text,txtDescription.Text,
             rate,"A",equipmentID);

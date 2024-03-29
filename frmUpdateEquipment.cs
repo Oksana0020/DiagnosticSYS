@@ -90,7 +90,6 @@ namespace DiagnosticSYS
             txtEmail.Text = updatedEquipment.GetManEmail();
             txtRoomNumber.Text = updatedEquipment.GetRoomNo().ToString();
             dtpPurchaseDate.Value = updatedEquipment.GetEqPurchaseDate();
-
             grpEquipmentUpdate.Visible = true;
         }
 

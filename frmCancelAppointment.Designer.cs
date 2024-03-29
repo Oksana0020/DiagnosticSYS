@@ -35,13 +35,31 @@
             this.txtPatientSurname = new System.Windows.Forms.TextBox();
             this.lblEquipmentName = new System.Windows.Forms.Label();
             this.grpAppointmentInfo = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblAppointmentDetails = new System.Windows.Forms.Label();
             this.lblEquipmentInfo = new System.Windows.Forms.Label();
             this.lblServiceInfo = new System.Windows.Forms.Label();
-            this.btnDiscontinueService = new System.Windows.Forms.Button();
-            this.lblAppointmentDetails = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.btnCancelAppt = new System.Windows.Forms.Button();
+            this.grdCancelAppointment = new System.Windows.Forms.DataGridView();
+            this.txtPForename = new System.Windows.Forms.TextBox();
+            this.txtPSurname = new System.Windows.Forms.TextBox();
+            this.txtAppDate = new System.Windows.Forms.TextBox();
+            this.txtAppTime = new System.Windows.Forms.TextBox();
+            this.txtAppointmentID = new System.Windows.Forms.TextBox();
+            this.txtReferral = new System.Windows.Forms.TextBox();
+            this.txtServiceName = new System.Windows.Forms.TextBox();
+            this.txtDoctorName = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.mnuBack.SuspendLayout();
             this.grpAppointmentInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdCancelAppointment)).BeginInit();
             this.SuspendLayout();
             // 
             // mnuBack
@@ -51,14 +69,14 @@
             this.bACKToolStripMenuItem1});
             this.mnuBack.Location = new System.Drawing.Point(0, 0);
             this.mnuBack.Name = "mnuBack";
-            this.mnuBack.Size = new System.Drawing.Size(800, 30);
+            this.mnuBack.Size = new System.Drawing.Size(800, 28);
             this.mnuBack.TabIndex = 8;
             this.mnuBack.Text = "mnuBack";
             // 
             // bACKToolStripMenuItem1
             // 
             this.bACKToolStripMenuItem1.Name = "bACKToolStripMenuItem1";
-            this.bACKToolStripMenuItem1.Size = new System.Drawing.Size(60, 26);
+            this.bACKToolStripMenuItem1.Size = new System.Drawing.Size(60, 24);
             this.bACKToolStripMenuItem1.Text = "BACK";
             this.bACKToolStripMenuItem1.Click += new System.EventHandler(this.mnuBack_Click);
             // 
@@ -107,21 +125,58 @@
             // 
             // grpAppointmentInfo
             // 
+            this.grpAppointmentInfo.Controls.Add(this.label9);
+            this.grpAppointmentInfo.Controls.Add(this.label8);
+            this.grpAppointmentInfo.Controls.Add(this.label7);
+            this.grpAppointmentInfo.Controls.Add(this.label6);
+            this.grpAppointmentInfo.Controls.Add(this.label5);
+            this.grpAppointmentInfo.Controls.Add(this.label4);
+            this.grpAppointmentInfo.Controls.Add(this.label3);
+            this.grpAppointmentInfo.Controls.Add(this.label2);
+            this.grpAppointmentInfo.Controls.Add(this.txtDoctorName);
+            this.grpAppointmentInfo.Controls.Add(this.txtServiceName);
+            this.grpAppointmentInfo.Controls.Add(this.txtReferral);
+            this.grpAppointmentInfo.Controls.Add(this.txtAppointmentID);
+            this.grpAppointmentInfo.Controls.Add(this.txtAppTime);
+            this.grpAppointmentInfo.Controls.Add(this.txtAppDate);
+            this.grpAppointmentInfo.Controls.Add(this.txtPSurname);
+            this.grpAppointmentInfo.Controls.Add(this.txtPForename);
             this.grpAppointmentInfo.Controls.Add(this.label1);
             this.grpAppointmentInfo.Controls.Add(this.lblAppointmentDetails);
             this.grpAppointmentInfo.Controls.Add(this.lblEquipmentInfo);
             this.grpAppointmentInfo.Controls.Add(this.lblServiceInfo);
-            this.grpAppointmentInfo.Controls.Add(this.btnDiscontinueService);
+            this.grpAppointmentInfo.Controls.Add(this.btnCancelAppt);
             this.grpAppointmentInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpAppointmentInfo.Location = new System.Drawing.Point(104, 152);
+            this.grpAppointmentInfo.Location = new System.Drawing.Point(35, 321);
             this.grpAppointmentInfo.Margin = new System.Windows.Forms.Padding(2);
             this.grpAppointmentInfo.Name = "grpAppointmentInfo";
             this.grpAppointmentInfo.Padding = new System.Windows.Forms.Padding(2);
-            this.grpAppointmentInfo.Size = new System.Drawing.Size(544, 287);
+            this.grpAppointmentInfo.Size = new System.Drawing.Size(728, 447);
             this.grpAppointmentInfo.TabIndex = 165;
             this.grpAppointmentInfo.TabStop = false;
             this.grpAppointmentInfo.Text = "Cancel Appointment";
             this.grpAppointmentInfo.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(36, 414);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(332, 20);
+            this.label1.TabIndex = 169;
+            this.label1.Text = "Would you like to cancel appointment?";
+            // 
+            // lblAppointmentDetails
+            // 
+            this.lblAppointmentDetails.AutoSize = true;
+            this.lblAppointmentDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAppointmentDetails.Location = new System.Drawing.Point(14, 38);
+            this.lblAppointmentDetails.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAppointmentDetails.Name = "lblAppointmentDetails";
+            this.lblAppointmentDetails.Size = new System.Drawing.Size(0, 20);
+            this.lblAppointmentDetails.TabIndex = 168;
             // 
             // lblEquipmentInfo
             // 
@@ -142,47 +197,198 @@
             this.lblServiceInfo.Size = new System.Drawing.Size(0, 20);
             this.lblServiceInfo.TabIndex = 166;
             // 
-            // btnDiscontinueService
+            // btnCancelAppt
             // 
-            this.btnDiscontinueService.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnDiscontinueService.Location = new System.Drawing.Point(398, 232);
-            this.btnDiscontinueService.Margin = new System.Windows.Forms.Padding(4);
-            this.btnDiscontinueService.Name = "btnDiscontinueService";
-            this.btnDiscontinueService.Size = new System.Drawing.Size(123, 35);
-            this.btnDiscontinueService.TabIndex = 32;
-            this.btnDiscontinueService.Text = "Confirm";
-            this.btnDiscontinueService.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnDiscontinueService.UseVisualStyleBackColor = true;
-            this.btnDiscontinueService.Click += new System.EventHandler(this.btnDiscontinueService_Click);
+            this.btnCancelAppt.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnCancelAppt.Location = new System.Drawing.Point(416, 406);
+            this.btnCancelAppt.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancelAppt.Name = "btnCancelAppt";
+            this.btnCancelAppt.Size = new System.Drawing.Size(123, 35);
+            this.btnCancelAppt.TabIndex = 32;
+            this.btnCancelAppt.Text = "Confirm";
+            this.btnCancelAppt.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCancelAppt.UseVisualStyleBackColor = true;
+            this.btnCancelAppt.Click += new System.EventHandler(this.btnCancelAppt_Click);
             // 
-            // lblAppointmentDetails
+            // grdCancelAppointment
             // 
-            this.lblAppointmentDetails.AutoSize = true;
-            this.lblAppointmentDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAppointmentDetails.Location = new System.Drawing.Point(14, 38);
-            this.lblAppointmentDetails.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblAppointmentDetails.Name = "lblAppointmentDetails";
-            this.lblAppointmentDetails.Size = new System.Drawing.Size(14, 20);
-            this.lblAppointmentDetails.TabIndex = 168;
-            this.lblAppointmentDetails.Text = ".";
+            this.grdCancelAppointment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdCancelAppointment.Location = new System.Drawing.Point(35, 135);
+            this.grdCancelAppointment.Name = "grdCancelAppointment";
+            this.grdCancelAppointment.RowHeadersWidth = 51;
+            this.grdCancelAppointment.RowTemplate.Height = 24;
+            this.grdCancelAppointment.Size = new System.Drawing.Size(715, 165);
+            this.grdCancelAppointment.TabIndex = 176;
+            this.grdCancelAppointment.Visible = false;
+            this.grdCancelAppointment.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CancelAppointment_CellClick);
             // 
-            // label1
+            // txtPForename
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 247);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(332, 20);
-            this.label1.TabIndex = 169;
-            this.label1.Text = "Would you like to cancel appointment?";
+            this.txtPForename.Location = new System.Drawing.Point(219, 78);
+            this.txtPForename.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPForename.MaxLength = 25;
+            this.txtPForename.Name = "txtPForename";
+            this.txtPForename.Size = new System.Drawing.Size(168, 27);
+            this.txtPForename.TabIndex = 170;
+            // 
+            // txtPSurname
+            // 
+            this.txtPSurname.Location = new System.Drawing.Point(219, 118);
+            this.txtPSurname.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPSurname.MaxLength = 25;
+            this.txtPSurname.Name = "txtPSurname";
+            this.txtPSurname.Size = new System.Drawing.Size(168, 27);
+            this.txtPSurname.TabIndex = 171;
+            // 
+            // txtAppDate
+            // 
+            this.txtAppDate.Location = new System.Drawing.Point(219, 170);
+            this.txtAppDate.Margin = new System.Windows.Forms.Padding(4);
+            this.txtAppDate.MaxLength = 25;
+            this.txtAppDate.Name = "txtAppDate";
+            this.txtAppDate.Size = new System.Drawing.Size(168, 27);
+            this.txtAppDate.TabIndex = 172;
+            // 
+            // txtAppTime
+            // 
+            this.txtAppTime.Location = new System.Drawing.Point(219, 225);
+            this.txtAppTime.Margin = new System.Windows.Forms.Padding(4);
+            this.txtAppTime.MaxLength = 25;
+            this.txtAppTime.Name = "txtAppTime";
+            this.txtAppTime.Size = new System.Drawing.Size(119, 27);
+            this.txtAppTime.TabIndex = 173;
+            // 
+            // txtAppointmentID
+            // 
+            this.txtAppointmentID.Location = new System.Drawing.Point(219, 35);
+            this.txtAppointmentID.Margin = new System.Windows.Forms.Padding(4);
+            this.txtAppointmentID.MaxLength = 25;
+            this.txtAppointmentID.Name = "txtAppointmentID";
+            this.txtAppointmentID.Size = new System.Drawing.Size(119, 27);
+            this.txtAppointmentID.TabIndex = 174;
+            // 
+            // txtReferral
+            // 
+            this.txtReferral.Location = new System.Drawing.Point(219, 270);
+            this.txtReferral.Margin = new System.Windows.Forms.Padding(4);
+            this.txtReferral.MaxLength = 25;
+            this.txtReferral.Name = "txtReferral";
+            this.txtReferral.Size = new System.Drawing.Size(168, 27);
+            this.txtReferral.TabIndex = 175;
+            // 
+            // txtServiceName
+            // 
+            this.txtServiceName.Location = new System.Drawing.Point(219, 317);
+            this.txtServiceName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtServiceName.MaxLength = 25;
+            this.txtServiceName.Name = "txtServiceName";
+            this.txtServiceName.Size = new System.Drawing.Size(217, 27);
+            this.txtServiceName.TabIndex = 176;
+            // 
+            // txtDoctorName
+            // 
+            this.txtDoctorName.Location = new System.Drawing.Point(219, 361);
+            this.txtDoctorName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDoctorName.MaxLength = 25;
+            this.txtDoctorName.Name = "txtDoctorName";
+            this.txtDoctorName.Size = new System.Drawing.Size(217, 27);
+            this.txtDoctorName.TabIndex = 177;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(36, 125);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(148, 20);
+            this.label2.TabIndex = 178;
+            this.label2.Text = "Patient Surname";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(36, 85);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(157, 20);
+            this.label3.TabIndex = 179;
+            this.label3.Text = "Patient Forename";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(36, 173);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(159, 20);
+            this.label4.TabIndex = 180;
+            this.label4.Text = "Appointment Date";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(41, 228);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(160, 20);
+            this.label5.TabIndex = 181;
+            this.label5.Text = "Appointment Time";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(36, 38);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(138, 20);
+            this.label6.TabIndex = 182;
+            this.label6.Text = "Appointment ID";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(41, 270);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(77, 20);
+            this.label7.TabIndex = 183;
+            this.label7.Text = "Referral";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(41, 320);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(72, 20);
+            this.label8.TabIndex = 184;
+            this.label8.Text = "Service";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(47, 364);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(66, 20);
+            this.label9.TabIndex = 185;
+            this.label9.Text = "Doctor";
             // 
             // frmCancelAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 779);
+            this.Controls.Add(this.grdCancelAppointment);
             this.Controls.Add(this.grpAppointmentInfo);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtPatientSurname);
@@ -195,6 +401,7 @@
             this.mnuBack.PerformLayout();
             this.grpAppointmentInfo.ResumeLayout(false);
             this.grpAppointmentInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdCancelAppointment)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -211,8 +418,25 @@
         private System.Windows.Forms.GroupBox grpAppointmentInfo;
         private System.Windows.Forms.Label lblEquipmentInfo;
         private System.Windows.Forms.Label lblServiceInfo;
-        private System.Windows.Forms.Button btnDiscontinueService;
+        private System.Windows.Forms.Button btnCancelAppt;
         private System.Windows.Forms.Label lblAppointmentDetails;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView grdCancelAppointment;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtDoctorName;
+        private System.Windows.Forms.TextBox txtServiceName;
+        private System.Windows.Forms.TextBox txtReferral;
+        private System.Windows.Forms.TextBox txtAppointmentID;
+        private System.Windows.Forms.TextBox txtAppTime;
+        private System.Windows.Forms.TextBox txtAppDate;
+        private System.Windows.Forms.TextBox txtPSurname;
+        private System.Windows.Forms.TextBox txtPForename;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
     }
 }

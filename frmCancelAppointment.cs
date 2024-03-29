@@ -14,10 +14,12 @@ namespace DiagnosticSYS
     public partial class frmCancelAppointment : Form
     {
         mnuMainMenu parent;
+        Appointment cancelledAppointment;
         public frmCancelAppointment()
         {
             InitializeComponent();
             this.parent = new mnuMainMenu();
+            this.cancelledAppointment = new Appointment();
         }
 
         private void mnuBack_Click(object sender, EventArgs e)
@@ -28,81 +30,84 @@ namespace DiagnosticSYS
 
         private void CancelAppointmentSerach_click(object sender, EventArgs e)
         {
-            string enteredPatientSurname = txtPatientSurname.Text.Trim();
+            // Find matching patient
+            DataSet ds = Appointment.findAppointment(txtPatientSurname.Text);
 
-            if (string.IsNullOrWhiteSpace(enteredPatientSurname) || enteredPatientSurname.Length > 30)
+            // Check if the returned dataset contains any rows
+            if (ds.Tables[0].Rows.Count == 0)
             {
-                MessageBox.Show("Invalid Patient Surname!",
-                                "Error",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
+                MessageBox.Show("No Data Found");
+                txtPatientSurname.Clear();
                 txtPatientSurname.Focus();
                 return;
             }
-            else
-            {
-                // Enable text boxes
-                grpAppointmentInfo.Visible = true;
 
-                switch (enteredPatientSurname.ToUpper())
-                {
-                    case "BAY":
-                        lblAppointmentDetails.Text = "Patient Forename: John" +
-                                                     "\nPatient Surname: Bay" +
-                                                     "\nAddress: 272 Main St" +
-                                                     "\nPhone: 527-1234" +
-                                                     "\nEmail: john.bay@mail.ua" +
-                                                     "\nAppointment Date: 2023-01-15" +
-                                                     "\nTime: 10:00 AM" +
-                                                     "\nDoctor: Dr. Smith";
-                        break;
-                    case "SMITH":
-                        lblAppointmentDetails.Text = "Patient Forename: Lily" +
-                                                     "\nPatient Surname: Smith" +
-                                                     "\nAddress: 496 Oak Street" +
-                                                     "\nPhone: 555-5678" +
-                                                     "\nEmail: jane.smith@gmail.com" +
-                                                     "\nAppointment Date: 2023-09-27" +
-                                                     "\nTime: 02:30 PM" +
-                                                     "\nDoctor: Dr. Johnson";
-                        break;
-                    case "WILLIAMS":
-                        lblAppointmentDetails.Text = "Patient Forename: Michael" +
-                                                     "\nPatient Surname: Williams" +
-                                                     "\nAddress: 789 Elm St" +
-                                                     "\nPhone: 555-9876" +
-                                                     "\nEmail: michael.w@yahoo.com" +
-                                                     "\nAppointment Date: 2023-11-10" +
-                                                     "\nTime: 11:45 AM" +
-                                                     "\nDoctor: Dr. Davis";
-                        break;
-                    case "BALES":
-                        lblAppointmentDetails.Text = "Patient Forename: Emily" +
-                                                     "\nPatient Surname: Bales" +
-                                                     "\nAddress: 192 Pine St" +
-                                                     "\nPhone: 555-4321" +
-                                                     "\nEmail: emily.b@gmail.com" +
-                                                     "\nAppointment Date: 2023-04-05" +
-                                                     "\nTime: 03:15 PM" +
-                                                     "\nDoctor: Dr. Miller";
-                        break;
-                    default:
-                        MessageBox.Show("Patient Surname not found!",
-                                        "Error",
-                                        MessageBoxButtons.OK,
-                                        MessageBoxIcon.Error);
-                        break;
-                }
+            // Bind the DataGridView to the returned DataSet
+            grdCancelAppointment.DataSource = ds.Tables[0];
+
+            // Make the DataGridView visible
+            grdCancelAppointment.Visible = true;
+        }
+
+        private void CancelAppointment_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if the clicked cell is not a header cell and if it belongs to the data rows
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                // Get the selected row
+                DataGridViewRow selectedRow = grdCancelAppointment.Rows[e.RowIndex];
+
+                // Extract the data from the selected row
+                string patientForename = selectedRow.Cells["PForename"].Value.ToString();
+                string patientSurname = selectedRow.Cells["PSurname"].Value.ToString();
+                DateTime appDate = Convert.ToDateTime(selectedRow.Cells["AppDate"].Value);
+                string formattedAppDate = appDate.ToString("dd/MM/yyyy");  // Format the date
+                string appTime = selectedRow.Cells["AppTime"].Value.ToString();
+                string referral = selectedRow.Cells["Referral"].Value.ToString();
+                string appointmentID = selectedRow.Cells["AppointmentID"].Value.ToString();
+                string serviceName = selectedRow.Cells["ServiceName"].Value.ToString();
+                string doctorForename = selectedRow.Cells["DForename"].Value.ToString();
+                string doctorSurname = selectedRow.Cells["DSurname"].Value.ToString();
+                string doctorName = $"{doctorForename} {doctorSurname}";
+
+                // Display the data in grpAppointmentInfo
+                txtPForename.Text = patientForename;
+                txtPSurname.Text = patientSurname;
+                txtAppDate.Text = formattedAppDate;
+                txtAppTime.Text = appTime;
+                txtReferral.Text = referral;
+                txtAppointmentID.Text = appointmentID;
+                txtServiceName.Text = serviceName;
+                txtDoctorName.Text = doctorName;
+
+                // Setting the appointmentID property of the cancelledAppointment object
+                cancelledAppointment.SetAppointmentID(int.Parse(appointmentID));
+
+                // Show the group box containing appointment info
+                grpAppointmentInfo.Visible = true;
             }
         }
 
-        private void btnDiscontinueService_Click(object sender, EventArgs e)
+
+        private void btnCancelAppt_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Appointment is Cancelled. Notification is sent to the patient.",
-                    "Appointment Cancelled",
-                    MessageBoxButtons.OK,
+            DialogResult result = MessageBox.Show("Are you sure you want to Cancel this Appointmet?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                cancelledAppointment.CancelAppointment();
+
+                MessageBox.Show("Appointment has been Cancelled in Database",
+                    "Success!", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
-            grpAppointmentInfo.Visible = false;
+
+
+                // Reset UI
+                grdCancelAppointment.Visible = false;
+                grpAppointmentInfo.Visible = false;
+                txtPatientSurname.Clear();
+                txtPatientSurname.Focus();
+            }
         }
     }
 }
