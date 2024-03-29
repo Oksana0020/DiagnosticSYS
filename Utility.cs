@@ -88,7 +88,8 @@ namespace DiagnosticSYS
         {
             cboRoomNumber.Items.Clear();
 
-            string strSQL = "SELECT RoomNo FROM Rooms WHERE RoomNo NOT IN (SELECT RoomNo FROM Equipment) ORDER BY RoomNo";
+            //string strSQL = "SELECT RoomNo FROM Rooms WHERE RoomNo NOT IN (SELECT RoomNo FROM Equipment) ORDER BY RoomNo";
+            string strSQL = "SELECT RoomNo FROM Rooms";
 
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
             conn.Open();

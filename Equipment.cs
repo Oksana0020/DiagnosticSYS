@@ -162,7 +162,8 @@ namespace DiagnosticSYS
         {
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
 
-            string formattedDate = this.eqPurchaseDate.ToString("dd-MMM-yyyy"); // Format the date
+            // formatting the date
+            string formattedDate = this.eqPurchaseDate.ToString("dd-MMM-yyyy"); 
 
             string sqlQuery = "UPDATE Equipments SET " +
                 "EquipmentName = '" + this.equipmentName + "', " +
