@@ -121,17 +121,17 @@ namespace DiagnosticSYS
         public void RegisterEquipment()
         {
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
-
-        string sqlQuery = "INSERT INTO Equipments VALUES (" +
-        this.equipmentID + ", '" +
-        this.equipmentName + "', '" +
-        this.model + "', '" +
-        this.manufacturer + "', " +
-        this.manPhoneNumber + ", '" +
-        this.manEmail + "', " +
-        this.roomNo + ", TO_DATE('" +
-        this.eqPurchaseDate.ToString("dd-MMM-yy") + "', 'DD-MON-YY'), '" +
-        'A' + "')";
+            string formattedDate = this.eqPurchaseDate.ToString("dd-MMM-yy").ToUpper();
+            string sqlQuery = "INSERT INTO Equipments VALUES (" +
+                              this.equipmentID + ", '" +
+                              this.equipmentName + "', '" +
+                              this.model + "', '" +
+                              this.manufacturer + "', " +
+                              this.manPhoneNumber + ", '" +
+                              this.manEmail + "', " +
+                              this.roomNo + ", '" +
+                              formattedDate + "', '" +
+                              'A' + "')";
 
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
 
@@ -162,8 +162,12 @@ namespace DiagnosticSYS
         {
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
 
+<<<<<<< HEAD
             // formatting the date
             string formattedDate = this.eqPurchaseDate.ToString("dd-MMM-yyyy"); 
+=======
+            string formattedDate = this.eqPurchaseDate.ToString("dd-MMM-yyyy");
+>>>>>>> d4eb61d2122bbd4e3b967633e03f73934ad52fd0
 
             string sqlQuery = "UPDATE Equipments SET " +
                 "EquipmentName = '" + this.equipmentName + "', " +

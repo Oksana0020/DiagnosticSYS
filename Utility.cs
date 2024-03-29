@@ -90,7 +90,10 @@ namespace DiagnosticSYS
 
             //string strSQL = "SELECT RoomNo FROM Rooms WHERE RoomNo NOT IN (SELECT RoomNo FROM Equipment) ORDER BY RoomNo";
             string strSQL = "SELECT RoomNo FROM Rooms";
+<<<<<<< HEAD
 
+=======
+>>>>>>> d4eb61d2122bbd4e3b967633e03f73934ad52fd0
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
             conn.Open();
 
@@ -109,23 +112,28 @@ namespace DiagnosticSYS
         public static ComboBox loadDoctors(ComboBox cboDoctors)
         {
             cboDoctors.Items.Clear();
-            string strSQL = "SELECT DForename,DSurname FROM Doctors";
+            string strSQL = "SELECT * FROM Doctors";
 
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
             conn.Open();
 
             OracleCommand cmd = new OracleCommand(strSQL, conn);
             OracleDataReader dr = cmd.ExecuteReader();
-            //reading room numbers and displaying in combo box
 
             while (dr.Read())
             {
-                cboDoctors.Items.Add(dr.GetString(0) + " " + dr.GetString(1));
+                int doctorId = dr.GetInt32(0);
+                string formattedDoctorId = doctorId.ToString().PadLeft(3, '0');
+                string doctorForename = dr.GetString(1);
+                string doctorSurname = dr.GetString(2);
+
+                cboDoctors.Items.Add(formattedDoctorId + " - " + doctorForename + " " + doctorSurname);
             }
 
             conn.Close();
             return cboDoctors;
         }
+
 
         public static ComboBox LoadAvailableTimes(ComboBox cboTimes, DateTime selectedDate)
         {

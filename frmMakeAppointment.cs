@@ -34,6 +34,7 @@ namespace DiagnosticSYS
             grpMakingAppointment.Visible = true;
             grpPatientDetails.Visible = false;
             cboEquipmentName = Utility.LoadEquipmentNames(cboEquipmentName);
+            
 
 
             // Get next Appointment ID

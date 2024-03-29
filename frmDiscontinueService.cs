@@ -60,7 +60,7 @@ namespace DiagnosticSYS
 
         private void btnConfirmDiscontinue_click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Are you sure you want to discontinue this service?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Are you sure you would like to discontinue this service?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
