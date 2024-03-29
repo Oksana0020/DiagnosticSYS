@@ -35,10 +35,6 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.grpServiceInfo = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblServiceInfo = new System.Windows.Forms.Label();
-            this.btnDiscontinueService = new System.Windows.Forms.Button();
-            this.grdDiscontinueServices = new System.Windows.Forms.DataGridView();
             this.txtServiceID = new System.Windows.Forms.TextBox();
             this.textServiceName = new System.Windows.Forms.TextBox();
             this.lblService = new System.Windows.Forms.Label();
@@ -47,6 +43,10 @@
             this.lblRate = new System.Windows.Forms.Label();
             this.txtServiceDescription = new System.Windows.Forms.TextBox();
             this.lblDescription = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblServiceInfo = new System.Windows.Forms.Label();
+            this.btnDiscontinueService = new System.Windows.Forms.Button();
+            this.grdDiscontinueServices = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.grpServiceInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdDiscontinueServices)).BeginInit();
@@ -137,6 +137,93 @@
             this.grpServiceInfo.Text = "Discontinue Service";
             this.grpServiceInfo.Visible = false;
             // 
+            // txtServiceID
+            // 
+            this.txtServiceID.Enabled = false;
+            this.txtServiceID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtServiceID.Location = new System.Drawing.Point(199, 35);
+            this.txtServiceID.Margin = new System.Windows.Forms.Padding(4);
+            this.txtServiceID.MaxLength = 25;
+            this.txtServiceID.Name = "txtServiceID";
+            this.txtServiceID.Size = new System.Drawing.Size(119, 27);
+            this.txtServiceID.TabIndex = 183;
+            // 
+            // textServiceName
+            // 
+            this.textServiceName.Enabled = false;
+            this.textServiceName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textServiceName.Location = new System.Drawing.Point(199, 74);
+            this.textServiceName.Margin = new System.Windows.Forms.Padding(4);
+            this.textServiceName.MaxLength = 25;
+            this.textServiceName.Name = "textServiceName";
+            this.textServiceName.Size = new System.Drawing.Size(119, 27);
+            this.textServiceName.TabIndex = 182;
+            this.textServiceName.Text = "MRI";
+            // 
+            // lblService
+            // 
+            this.lblService.AutoSize = true;
+            this.lblService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblService.Location = new System.Drawing.Point(50, 77);
+            this.lblService.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblService.Name = "lblService";
+            this.lblService.Size = new System.Drawing.Size(126, 20);
+            this.lblService.TabIndex = 181;
+            this.lblService.Text = "Service Name";
+            // 
+            // lblServiceID
+            // 
+            this.lblServiceID.AutoSize = true;
+            this.lblServiceID.Location = new System.Drawing.Point(50, 38);
+            this.lblServiceID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblServiceID.Name = "lblServiceID";
+            this.lblServiceID.Size = new System.Drawing.Size(97, 20);
+            this.lblServiceID.TabIndex = 180;
+            this.lblServiceID.Text = "Service ID";
+            // 
+            // txtRate
+            // 
+            this.txtRate.Enabled = false;
+            this.txtRate.Location = new System.Drawing.Point(199, 187);
+            this.txtRate.Margin = new System.Windows.Forms.Padding(4);
+            this.txtRate.MaxLength = 6;
+            this.txtRate.Name = "txtRate";
+            this.txtRate.Size = new System.Drawing.Size(132, 27);
+            this.txtRate.TabIndex = 179;
+            this.txtRate.Text = "200.00";
+            this.txtRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lblRate
+            // 
+            this.lblRate.AutoSize = true;
+            this.lblRate.Location = new System.Drawing.Point(56, 190);
+            this.lblRate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblRate.Name = "lblRate";
+            this.lblRate.Size = new System.Drawing.Size(48, 20);
+            this.lblRate.TabIndex = 178;
+            this.lblRate.Text = "Rate";
+            // 
+            // txtServiceDescription
+            // 
+            this.txtServiceDescription.Enabled = false;
+            this.txtServiceDescription.Location = new System.Drawing.Point(199, 125);
+            this.txtServiceDescription.Margin = new System.Windows.Forms.Padding(4);
+            this.txtServiceDescription.MaxLength = 50;
+            this.txtServiceDescription.Name = "txtServiceDescription";
+            this.txtServiceDescription.Size = new System.Drawing.Size(276, 27);
+            this.txtServiceDescription.TabIndex = 177;
+            this.txtServiceDescription.Text = "Magnetic Resonance Imaging";
+            // 
+            // lblDescription
+            // 
+            this.lblDescription.AutoSize = true;
+            this.lblDescription.Location = new System.Drawing.Point(50, 128);
+            this.lblDescription.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDescription.Name = "lblDescription";
+            this.lblDescription.Size = new System.Drawing.Size(106, 20);
+            this.lblDescription.TabIndex = 176;
+            this.lblDescription.Text = "Description";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -179,89 +266,6 @@
             this.grdDiscontinueServices.Size = new System.Drawing.Size(715, 165);
             this.grdDiscontinueServices.TabIndex = 174;
             this.grdDiscontinueServices.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdDiscontinueServices_CellClick);
-            // 
-            // txtServiceID
-            // 
-            this.txtServiceID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServiceID.Location = new System.Drawing.Point(199, 35);
-            this.txtServiceID.Margin = new System.Windows.Forms.Padding(4);
-            this.txtServiceID.MaxLength = 25;
-            this.txtServiceID.Name = "txtServiceID";
-            this.txtServiceID.Size = new System.Drawing.Size(119, 27);
-            this.txtServiceID.TabIndex = 183;
-            // 
-            // textServiceName
-            // 
-            this.textServiceName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textServiceName.Location = new System.Drawing.Point(199, 74);
-            this.textServiceName.Margin = new System.Windows.Forms.Padding(4);
-            this.textServiceName.MaxLength = 25;
-            this.textServiceName.Name = "textServiceName";
-            this.textServiceName.Size = new System.Drawing.Size(119, 27);
-            this.textServiceName.TabIndex = 182;
-            this.textServiceName.Text = "MRI";
-            // 
-            // lblService
-            // 
-            this.lblService.AutoSize = true;
-            this.lblService.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblService.Location = new System.Drawing.Point(50, 77);
-            this.lblService.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblService.Name = "lblService";
-            this.lblService.Size = new System.Drawing.Size(126, 20);
-            this.lblService.TabIndex = 181;
-            this.lblService.Text = "Service Name";
-            // 
-            // lblServiceID
-            // 
-            this.lblServiceID.AutoSize = true;
-            this.lblServiceID.Location = new System.Drawing.Point(50, 38);
-            this.lblServiceID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblServiceID.Name = "lblServiceID";
-            this.lblServiceID.Size = new System.Drawing.Size(97, 20);
-            this.lblServiceID.TabIndex = 180;
-            this.lblServiceID.Text = "Service ID";
-            // 
-            // txtRate
-            // 
-            this.txtRate.Location = new System.Drawing.Point(199, 187);
-            this.txtRate.Margin = new System.Windows.Forms.Padding(4);
-            this.txtRate.MaxLength = 6;
-            this.txtRate.Name = "txtRate";
-            this.txtRate.Size = new System.Drawing.Size(132, 27);
-            this.txtRate.TabIndex = 179;
-            this.txtRate.Text = "200.00";
-            this.txtRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lblRate
-            // 
-            this.lblRate.AutoSize = true;
-            this.lblRate.Location = new System.Drawing.Point(56, 190);
-            this.lblRate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblRate.Name = "lblRate";
-            this.lblRate.Size = new System.Drawing.Size(48, 20);
-            this.lblRate.TabIndex = 178;
-            this.lblRate.Text = "Rate";
-            // 
-            // txtServiceDescription
-            // 
-            this.txtServiceDescription.Location = new System.Drawing.Point(199, 125);
-            this.txtServiceDescription.Margin = new System.Windows.Forms.Padding(4);
-            this.txtServiceDescription.MaxLength = 50;
-            this.txtServiceDescription.Name = "txtServiceDescription";
-            this.txtServiceDescription.Size = new System.Drawing.Size(276, 27);
-            this.txtServiceDescription.TabIndex = 177;
-            this.txtServiceDescription.Text = "Magnetic Resonance Imaging";
-            // 
-            // lblDescription
-            // 
-            this.lblDescription.AutoSize = true;
-            this.lblDescription.Location = new System.Drawing.Point(50, 128);
-            this.lblDescription.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(106, 20);
-            this.lblDescription.TabIndex = 176;
-            this.lblDescription.Text = "Description";
             // 
             // frmDiscontinueService
             // 

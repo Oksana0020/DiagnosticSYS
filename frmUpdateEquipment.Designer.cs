@@ -84,7 +84,7 @@
             // 
             this.txtSearchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearchName.Location = new System.Drawing.Point(261, 90);
-            this.txtSearchName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSearchName.Margin = new System.Windows.Forms.Padding(4);
             this.txtSearchName.MaxLength = 25;
             this.txtSearchName.Name = "txtSearchName";
             this.txtSearchName.Size = new System.Drawing.Size(119, 27);
@@ -172,7 +172,7 @@
             // txtEquipmentID
             // 
             this.txtEquipmentID.Location = new System.Drawing.Point(179, 58);
-            this.txtEquipmentID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEquipmentID.Margin = new System.Windows.Forms.Padding(4);
             this.txtEquipmentID.MaxLength = 2;
             this.txtEquipmentID.Name = "txtEquipmentID";
             this.txtEquipmentID.Size = new System.Drawing.Size(39, 27);
@@ -183,8 +183,7 @@
             this.dtpPurchaseDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpPurchaseDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpPurchaseDate.Location = new System.Drawing.Point(512, 142);
-            this.dtpPurchaseDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dtpPurchaseDate.MaxDate = new System.DateTime(2024, 2, 22, 10, 46, 59, 0);
+            this.dtpPurchaseDate.Margin = new System.Windows.Forms.Padding(4);
             this.dtpPurchaseDate.Name = "dtpPurchaseDate";
             this.dtpPurchaseDate.Size = new System.Drawing.Size(175, 27);
             this.dtpPurchaseDate.TabIndex = 183;
@@ -193,7 +192,7 @@
             // txtRoomNumber
             // 
             this.txtRoomNumber.Location = new System.Drawing.Point(512, 94);
-            this.txtRoomNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtRoomNumber.Margin = new System.Windows.Forms.Padding(4);
             this.txtRoomNumber.MaxLength = 2;
             this.txtRoomNumber.Name = "txtRoomNumber";
             this.txtRoomNumber.Size = new System.Drawing.Size(39, 27);
@@ -226,7 +225,7 @@
             // txtPhoneNumber
             // 
             this.txtPhoneNumber.Location = new System.Drawing.Point(179, 217);
-            this.txtPhoneNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPhoneNumber.Margin = new System.Windows.Forms.Padding(4);
             this.txtPhoneNumber.MaxLength = 10;
             this.txtPhoneNumber.Name = "txtPhoneNumber";
             this.txtPhoneNumber.Size = new System.Drawing.Size(119, 27);
@@ -235,7 +234,7 @@
             // txtManufacturer
             // 
             this.txtManufacturer.Location = new System.Drawing.Point(179, 174);
-            this.txtManufacturer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtManufacturer.Margin = new System.Windows.Forms.Padding(4);
             this.txtManufacturer.MaxLength = 15;
             this.txtManufacturer.Name = "txtManufacturer";
             this.txtManufacturer.Size = new System.Drawing.Size(161, 27);
@@ -256,7 +255,7 @@
             // txtEmail
             // 
             this.txtEmail.Location = new System.Drawing.Point(512, 50);
-            this.txtEmail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(4);
             this.txtEmail.MaxLength = 30;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(197, 27);
@@ -299,7 +298,7 @@
             // txtModel
             // 
             this.txtModel.Location = new System.Drawing.Point(179, 132);
-            this.txtModel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtModel.Margin = new System.Windows.Forms.Padding(4);
             this.txtModel.MaxLength = 10;
             this.txtModel.Name = "txtModel";
             this.txtModel.Size = new System.Drawing.Size(120, 27);
@@ -319,7 +318,7 @@
             // txtEquipmentName
             // 
             this.txtEquipmentName.Location = new System.Drawing.Point(179, 95);
-            this.txtEquipmentName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEquipmentName.Margin = new System.Windows.Forms.Padding(4);
             this.txtEquipmentName.MaxLength = 15;
             this.txtEquipmentName.Name = "txtEquipmentName";
             this.txtEquipmentName.Size = new System.Drawing.Size(161, 27);
@@ -369,7 +368,7 @@
             // 
             this.btnUpdateEquipment.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.btnUpdateEquipment.Location = new System.Drawing.Point(245, 281);
-            this.btnUpdateEquipment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnUpdateEquipment.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdateEquipment.Name = "btnUpdateEquipment";
             this.btnUpdateEquipment.Size = new System.Drawing.Size(148, 48);
             this.btnUpdateEquipment.TabIndex = 32;

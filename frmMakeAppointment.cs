@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Oracle.ManagedDataAccess.Client;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using static DiagnosticSYS.frmViewDailySchedule;
 
 namespace DiagnosticSYS
 {
@@ -33,6 +34,7 @@ namespace DiagnosticSYS
             grpMakingAppointment.Visible = true;
             grpPatientDetails.Visible = false;
             cboEquipmentName = Utility.LoadEquipmentNames(cboEquipmentName);
+            
 
             // Get next Appointment ID
             txtApptID.Text = Appointment.GetNextAppointmentID().ToString("00");
@@ -102,6 +104,7 @@ namespace DiagnosticSYS
         private void cboEquipmentName_SelectedIndexChanged(object sender, EventArgs e)
         {
             grpPatientDetails.Visible = true;
+            txtPatientID.Text = Appointment.GetNextPatientID().ToString("00");
         }
 
 
@@ -165,47 +168,64 @@ namespace DiagnosticSYS
             }
 
             // Create a new instance of Appointment
+            Appointment newAppointment = new Appointment();
+
+            // Get the selected service name
+            string selectedServiceName = cboServices.SelectedItem.ToString();
+
+            // Extract ServiceID and parse it to an integer
+            int serviceId = int.Parse(selectedServiceName.Substring(0, 3));
+
+            // Get the selected doctor name and corresponding doctor ID
+            string selectedDoctorName = cboDoctors.SelectedItem.ToString();
+            int doctorID = int.Parse(selectedDoctorName.Substring(0, 3));
+
+            // get the generated patient ID
+            //int patientId = Convert.ToInt32(txtPatientID.Text);
+            int patientId = Appointment.GetNextPatientID();
+
             // Create a new instance of Appointment
-            Appointment newAppointment = new Appointment(
-                Convert.ToInt32(txtApptID.Text), 
-                cboServices.Text, // serviceName
-                Convert.ToDecimal(txtServiceRate.Text), 
-                dtmDate.Value.Date, 
-                cboAppointmentTime.Text, 
-                cboDoctors.Text, 
-                cboEquipmentName.Text, 
-                txtPatientForename.Text, 
-                txtPatientSurname.Text, 
-                txtAddress.Text, 
-                Convert.ToInt32(txtPhone.Text), 
-                txtEmail.Text, 
-                txtReferral.Text, 
-                "M", 
-                0, // patientID 
-                0, // serviceID
-                0 // doctorID 
+            Appointment appointment = new Appointment(
+                Convert.ToInt32(txtApptID.Text),
+                cboServices.Text,
+                Convert.ToDecimal(txtServiceRate.Text),
+                dtmDate.Value.Date,
+                cboAppointmentTime.Text,
+                cboDoctors.Text,
+                cboEquipmentName.Text,
+                txtPatientForename.Text,
+                txtPatientSurname.Text,
+                txtAddress.Text,
+                Convert.ToInt32(txtPhone.Text),
+                txtEmail.Text,
+                txtReferral.Text,
+                "M",
+                patientId,
+                serviceId,
+                doctorID
             );
 
-
-
             // Invoke the method to add the data to the Appointment table
-            newAppointment.MakeAppointment();
+            appointment.MakeAppointment();
+
 
             MessageBox.Show("New appointment added successfully", "Success",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            // Reset UI
 
-            txtPatientForename.Clear();   
-            txtPatientSurname.Clear();    
-            txtAddress.Clear();           
-            txtPhone.Clear();             
-            txtEmail.Clear();             
+            // Reset UI
+            grpPatientDetails.Visible = false;
+            grpAppDetails.Visible = false;
+            txtPatientForename.Clear();
+            txtPatientSurname.Clear();
+            txtAddress.Clear();
+            txtPhone.Clear();
+            txtEmail.Clear();
             txtReferral.Clear();
             txtServiceRate.Clear();
+            cboServices.SelectedItem = null;
+            txtApptID.Text = Appointment.GetNextAppointmentID().ToString("00");
 
-            // Setting focus
-            txtPatientForename.Focus();
         }
 
         // checking if a string contains only alphabetic characters
@@ -240,3 +260,4 @@ namespace DiagnosticSYS
 
     }
 }
+
