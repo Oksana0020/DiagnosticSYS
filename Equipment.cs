@@ -30,7 +30,7 @@ namespace DiagnosticSYS
             this.manEmail = "";
             this.roomNo = 0;
             this.eqPurchaseDate = DateTime.Now;
-            this.eqStatus = "A"; 
+            this.eqStatus = "A";
         }
 
         public Equipment(decimal equipmentID, string equipmentName, string model, string manufacturer, decimal manPhoneNumber, string manEmail, decimal roomNo, DateTime eqPurchaseDate, string eqStatus)
@@ -68,7 +68,7 @@ namespace DiagnosticSYS
         public void SetEqPurchaseDate(DateTime eqPurchaseDate) { this.eqPurchaseDate = eqPurchaseDate; }
         public void SetEqStatus(string eqStatus) { this.eqStatus = eqStatus; }
 
-        
+
         public void getEquipment(decimal Id)
         {
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
@@ -121,17 +121,17 @@ namespace DiagnosticSYS
         public void RegisterEquipment()
         {
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
-
-        string sqlQuery = "INSERT INTO Equipments VALUES (" +
-        this.equipmentID + ", '" +
-        this.equipmentName + "', '" +
-        this.model + "', '" +
-        this.manufacturer + "', " +
-        this.manPhoneNumber + ", '" +
-        this.manEmail + "', " +
-        this.roomNo + ", TO_DATE('" +
-        this.eqPurchaseDate.ToString("dd-MMM-yy") + "', 'DD-MON-YY'), '" +
-        'A' + "')";
+            string formattedDate = this.eqPurchaseDate.ToString("dd-MMM-yy").ToUpper();
+            string sqlQuery = "INSERT INTO Equipments VALUES (" +
+                              this.equipmentID + ", '" +
+                              this.equipmentName + "', '" +
+                              this.model + "', '" +
+                              this.manufacturer + "', " +
+                              this.manPhoneNumber + ", '" +
+                              this.manEmail + "', " +
+                              this.roomNo + ", '" +
+                              formattedDate + "', '" +
+                              'A' + "')";
 
             OracleCommand cmd = new OracleCommand(sqlQuery, conn);
 
@@ -162,7 +162,7 @@ namespace DiagnosticSYS
         {
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
 
-            string formattedDate = this.eqPurchaseDate.ToString("dd-MMM-yyyy"); // Format the date
+            string formattedDate = this.eqPurchaseDate.ToString("dd-MMM-yyyy");
 
             string sqlQuery = "UPDATE Equipments SET " +
                 "EquipmentName = '" + this.equipmentName + "', " +
@@ -171,7 +171,7 @@ namespace DiagnosticSYS
                 "ManPhoneNumber = " + this.manPhoneNumber + ", " +
                 "ManEmail = '" + this.manEmail + "', " +
                 "RoomNo = " + this.roomNo + ", " +
-                "EqPurchaseDate = '" + formattedDate + "', " + 
+                "EqPurchaseDate = '" + formattedDate + "', " +
                 "EqStatus = '" + this.eqStatus + "' " +
                 "WHERE EquipmentID = " + this.equipmentID;
 
@@ -282,4 +282,4 @@ namespace DiagnosticSYS
     }
 }
 
-    
+

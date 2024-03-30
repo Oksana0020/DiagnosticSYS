@@ -49,12 +49,12 @@ namespace DiagnosticSYS
             this.phone = 0;
             this.email = "";
             this.referral = "";
-            this.appStatus = "";
+            this.appStatus = "A";
         }
 
-        public Appointment(int appointmentID, string serviceName, decimal rate, DateTime appointmentDate, 
-        string appointmentTime,string doctor,
-        string equipmentName, string patientForename, string patientSurname, string address, int phone, string email, string referral, 
+        public Appointment(int appointmentID, string serviceName, decimal rate, DateTime appointmentDate,
+        string appointmentTime, string doctor,
+        string equipmentName, string patientForename, string patientSurname, string address, int phone, string email, string referral,
         string appStatus, int patientID, int serviceID, int doctorID)
         {
             this.appointmentID = appointmentID;
@@ -73,7 +73,7 @@ namespace DiagnosticSYS
             this.appStatus = appStatus;
             this.patientID = patientID;
             this.serviceID = serviceID;
-            this.doctorID = doctorID;   
+            this.doctorID = doctorID;
         }
 
         // Getters 
@@ -143,39 +143,112 @@ namespace DiagnosticSYS
             return nextId;
         }
 
+        public static int GetNextPatientID()
+        {
+            int nextId = 0;
+            OracleConnection conn = null;
+            OracleCommand cmd = null;
+            OracleDataReader dr = null;
+
+            try
+            {
+                conn = new OracleConnection(DBConnect.oraDB);
+                string sqlQuery = "SELECT MAX(PatientID) FROM Patients";
+
+                cmd = new OracleCommand(sqlQuery, conn);
+                conn.Open();
+
+                dr = cmd.ExecuteReader();
+
+                if (dr.Read() && !dr.IsDBNull(0))
+                {
+                    nextId = dr.GetInt32(0) + 1;
+                }
+                else
+                {
+                    nextId = 1;
+                }
+            }
+            catch (OracleException ex)
+            {
+                Console.WriteLine($"Oracle Error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+            finally
+            {
+                if (dr != null)
+                {
+                    dr.Close();
+                    dr.Dispose();
+                }
+                if (cmd != null)
+                {
+                    cmd.Dispose();
+                }
+                if (conn != null && conn.State == ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+
+            return nextId;
+        }
+
+
         public void MakeAppointment()
         {
             OracleConnection conn = new OracleConnection(DBConnect.oraDB);
-            // Define the SQL query to insert into Appointments table
-            string appointmentQuery = "INSERT INTO Appointments (AppointmentID, AppDate, AppTime, Referral, AppStatus, PatientID, ServiceID, DoctorID) " +
+            OracleCommand cmd = new OracleCommand();
+
+            try
+            {
+                // Generate the next patient ID
+                this.patientID = GetNextPatientID();
+
+                conn.Open();
+
+                // Define the SQL query to insert into Patients table
+                string patientQuery = "INSERT INTO Patients (PatientID, PForename, PSurname, Address, Phone, Email) " +
                                       "VALUES (" +
-                                      this.GetAppointmentID() + ", " +
-                                      "TO_DATE('" + this.GetAppointmentDate().ToString("yyyy-MM-dd") + "', 'YYYY-MM-DD'), '" +
-                                      this.GetAppointmentTime() + "', '" +
-                                      this.GetReferral() + "', '" + 
-                                      this.GetAppStatus() + "', '" + 
-                                      this.GetPatientID() + "', '" + 
-                                      this.GetServiceID() + "', '" + 
-                                      this.GetDoctorID() + "')"; 
+                                      this.patientID + ", '" +
+                                      this.patientForename + "', '" +
+                                      this.patientSurname + "', '" +
+                                      this.address + "', '" +
+                                      this.phone + "', '" +
+                                      this.email + "')";
 
-            // Define the SQL query to insert into Patients table
-            string patientQuery = "INSERT INTO Patients (PatientID, PForename, PSurname, Address, Phone, Email) " +
-                                  "VALUES (" +
-                                  this.GetPatientID() + ", '" +
-                                  this.GetPatientForename() + "', '" +
-                                  this.GetPatientSurname() + "', '" +
-                                  this.GetAddress() + "', '" +
-                                  this.GetPhone() + "', '" +
-                                  this.GetEmail() + "')";
+                // Execute the patient insertion query
+                cmd.CommandText = patientQuery;
+                cmd.Connection = conn;
+                cmd.ExecuteNonQuery();
 
-            conn.Open();
-            OracleCommand cmd = new OracleCommand(appointmentQuery, conn); 
-            cmd.ExecuteNonQuery();
+                // Insert appointment details using the generated PatientID
+                string appointmentQuery = "INSERT INTO Appointments (AppointmentID, AppDate, AppTime, Referral, AppStatus, PatientID, ServiceID, DoctorID) " +
+                                          "VALUES (" +
+                                          this.appointmentID + ", " +
+                                          "TO_DATE('" + this.appointmentDate.ToString("dd-MMM-yy") + "', 'DD-MON-YY'), '" +
+                                          this.appointmentTime + "', '" +
+                                          this.referral + "', '" +
+                                          this.appStatus + "', " +
+                                          this.patientID + ", " +
+                                          this.serviceID + ", " +
+                                          this.doctorID + ")";
 
-            cmd = new OracleCommand(patientQuery, conn); 
-            cmd.ExecuteNonQuery();
-
-            conn.Close(); 
+                cmd.CommandText = appointmentQuery;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            finally
+            {
+                // Close connection
+                conn.Close();
+            }
         }
 
 
@@ -217,7 +290,60 @@ namespace DiagnosticSYS
             return rate;
         }
 
-        
+        public void CancelAppointment()
+        {
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+
+            try
+            {
+                conn.Open();
+
+                string sqlQuery = "UPDATE Appointments SET AppStatus = 'C' WHERE AppointmentID = " + this.appointmentID;
+
+                OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+
+        public static DataSet findAppointment(string patientSurname)
+        {
+            OracleConnection conn = new OracleConnection(DBConnect.oraDB);
+
+            // Define the SQL query to be executed
+            string sqlQuery = @"
+        SELECT P.PForename, P.PSurname, A.AppointmentID, A.AppDate, A.AppTime, A.Referral, S.ServiceName, D.DForename, D.DSurname
+        FROM Appointments A
+        INNER JOIN Patients P ON A.PatientID = P.PatientID
+        INNER JOIN Services S ON A.ServiceID = S.ServiceID
+        INNER JOIN Doctors D ON A.DoctorID = D.DoctorID
+        WHERE UPPER(P.PSurname) LIKE UPPER(:PatientSurname)
+        ORDER BY A.AppDate, A.AppTime";
+
+            Console.WriteLine($"Executing query: {sqlQuery}");
+
+            OracleCommand cmd = new OracleCommand(sqlQuery, conn);
+            cmd.Parameters.Add("PatientSurname", OracleDbType.Varchar2).Value = "%" + patientSurname + "%";
+
+            OracleDataAdapter da = new OracleDataAdapter(cmd);
+
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
+            Console.WriteLine($"Rows returned: {ds.Tables[0].Rows.Count}");
+
+            conn.Close();
+
+            return ds;
+        }
 
     }
 }
